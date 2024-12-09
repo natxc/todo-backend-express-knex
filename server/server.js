@@ -8,7 +8,7 @@ const teamsRoutes = require("./routes/teamsRoutes.js");
 
 const port = process.env.PORT || 5000;
 
-app.use('/', todosRoutes);
+app.use('/todos', todosRoutes);
 app.use('/teams', teamsRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
