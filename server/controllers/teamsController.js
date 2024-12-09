@@ -4,7 +4,7 @@ const teams = require('../models/teamsQueries.js');
 function createTeam(req, data) {
     const protocol = req.protocol,
         host = req.get('host'),
-        id = data.id;
+        id = data.team_id;
 
     return {
         name: data.name,
@@ -13,9 +13,17 @@ function createTeam(req, data) {
 }
 
 async function getAllTeams(req, res) {
-    const allEntries = await teams.all();
-    return res.send(allEntries.map(_.curry(createTeam)(req)));
+    console.log("Fetching all teams...");
+    try {
+        const allEntries = await teams.all(); // Query the database
+        console.log("Teams retrieved:", allEntries);
+        return res.send(allEntries);
+    } catch (err) {
+        console.error("Error fetching all teams:", err);
+        return res.status(500).send("Oops! Could not fetch teams.");
+    }
 }
+
 
 async function getTeam(req, res) {
     const team = await teams.get(req.params.id);

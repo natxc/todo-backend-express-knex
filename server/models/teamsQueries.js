@@ -5,7 +5,7 @@ async function all() {
 }
 
 async function get(id) {
-    const results = await knex('teams').where({ id });
+    const results = await knex('teams').where({ team_id: id });
     return results[0];
 }
 
@@ -15,13 +15,13 @@ async function create(name) {
 }
 
 async function update(id, properties) {
-    const results = await knex('teams').where({ id }).update({ ...properties }).returning('*');
+    const results = await knex('teams').where({ team_id: id }).update({ ...properties }).returning('*');
     return results[0];
 }
 
 // delete is a reserved keyword
 async function del(id) {
-    const results = await knex('teams').where({ id }).del().returning('*');
+    const results = await knex('teams').where({ team_id: id }).del().returning('*');
     return results[0];
 }
 
