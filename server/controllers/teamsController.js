@@ -24,7 +24,7 @@ async function getTeam(req, res) {
 
 async function postTeam(req, res) {
     const created = await teams.create(req.body.name);
-    return res.send(createToDo(req, created));
+    return res.send(createTeam(req, created));
 }
 
 async function patchTeam(req, res) {
