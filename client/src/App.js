@@ -20,7 +20,7 @@ class App extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     let { method, id, title, order, completed } = this.state;
-    
+
     let request = {
       method,
       headers: {
@@ -33,17 +33,17 @@ class App extends Component {
     order = order ? Number(order) : undefined;
 
     if (method !== "GET")
-      request.body = JSON.stringify({ title, order, completed })
+      request.body = JSON.stringify({ title, order, completed });
 
-    this.setState({ lastRequest: `${method} at /${id}`});
-    // Code smells, but the setup of todo-backend with get('/') returning a list of todos requires
-    // that we directly hit localhost instead of being able to rely on the proxy.
-    // We can only proxy non-root gets.
+    this.setState({ lastRequest: `${method} at /todos/${id}` });
+
     let response;
+
+    // Adjusted the base URL to use /todos
     if (process.env.NODE_ENV === "development" && method === "GET" && id === '') {
-      response = await fetch('http://localhost:5000/', request);
+      response = await fetch('http://localhost:5000/todos', request); // Updated to '/todos'
     } else {
-      response = await fetch(`/${id}`, request);
+      response = await fetch(`/todos/${id}`, request); // Updated to '/todos'
     }
 
     const contentType = response.headers.get('content-type');
@@ -61,10 +61,8 @@ class App extends Component {
       return;
     }
 
-    // Ensures formart of [{}, {}, {}]
     if (!Array.isArray(body))
       body = Array(body);
-  
     this.setState({ response: body });
   };
 
