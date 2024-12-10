@@ -11,15 +11,30 @@ class App extends Component {
 
     id: '',
     title: '',
-    order: '',
-    completed: false,
+    description: '',
+    status: '',
+    priority: '',
+    project_id: '',
+    reported_by: '',
+    assigned_to: '',
+    due_date: '',
 
     response: [],
   };
   
   handleSubmit = async e => {
     e.preventDefault();
-    let { method, id, title, order, completed } = this.state;
+    let { method,
+      id,
+      title,
+      description,
+      status,
+      priority,
+      project_id,
+      reported_by,
+      assigned_to,
+      due_date
+     } = this.state;
 
     let request = {
       method,
@@ -30,20 +45,26 @@ class App extends Component {
 
     // Undefined ensures not changing to empty string.
     title = title ? title : undefined;
-    order = order ? Number(order) : undefined;
-
+    description = description ? description : undefined;
+    status = status ? status : undefined;
+    priority = priority ? priority : undefined;
+    project_id = project_id ? project_id : undefined;
+    reported_by = reported_by ? reported_by : undefined;
+    assigned_to = assigned_to ? assigned_to : undefined;
+    due_date = due_date ? due_date : undefined;
+ 
     if (method !== "GET")
-      request.body = JSON.stringify({ title, order, completed });
+      request.body = JSON.stringify({ title, description, status, priority, project_id, reported_by, assigned_to, due_date });
 
-    this.setState({ lastRequest: `${method} at /todos/${id}` });
+    this.setState({ lastRequest: `${method} at /issues/${id}` });
 
     let response;
 
-    // Adjusted the base URL to use /todos
+
     if (process.env.NODE_ENV === "development" && method === "GET" && id === '') {
-      response = await fetch('http://localhost:5000/todos', request); // Updated to '/todos'
+      response = await fetch('http://localhost:5000/issues', request);
     } else {
-      response = await fetch(`/todos/${id}`, request); // Updated to '/todos'
+      response = await fetch(`/issues/${id}`, request);
     }
 
     const contentType = response.headers.get('content-type');
@@ -71,12 +92,14 @@ class App extends Component {
   };
   
   render() {
-    const { method, lastRequest, id, title, order, completed, response } = this.state;
+    const { method, lastRequest, id, title, description, status, priority, assigned_to, response } = this.state;
 
     const shouldDisplayIdInput = method !== "POST";
     const shouldDisplayTitleInput = method === "POST" || method === "PATCH";
-    const shouldDisplayOrderInput = method === "POST" || method === "PATCH";
-    const shouldDisplayCompletedInput = method === "PATCH";
+    const shouldDisplayDescriptionInput = method === "POST" || method === "PATCH";
+    const shouldDisplayStatusInput = method === "POST" || method === "PATCH";
+    const shouldDisplayPriorityInput = method === "POST" || method === "PATCH";
+    const shouldDisplayAssignedToInput = method === "POST" || method === "PATCH";
 
     return (
       <div className="App">
@@ -107,39 +130,49 @@ class App extends Component {
           <input
             disabled={!shouldDisplayTitleInput}
             type="text"
-            placeholder="title (string)"
+            placeholder="Title (string)"
             value={title}
             onChange={e => this.setState({ title: e.target.value })}
           />
           <input
-            disabled={!shouldDisplayOrderInput}
+            disabled={!shouldDisplayDescriptionInput}
             type="text"
-            placeholder="order (int)"
-            value={order}
-            onChange={e => this.setState({ order: e.target.value })}
+            placeholder="Description (string)"
+            value={description}
+            onChange={e => this.setState({ description: e.target.value })}
           />
-
-          <label>
-            Completed?
-            <input
-              display="inline-block"
-              disabled={!shouldDisplayCompletedInput}
-              type="checkbox"
-              value={completed}
-              onChange={e => this.setState({ completed: e.target.checked })}
-            />
-          </label>
+          <input
+            disabled={!shouldDisplayStatusInput}
+            type="text"
+            placeholder="Status (enum)"
+            value={status}
+            onChange={e => this.setState({ status: e.target.value })}
+          />
+          <input
+            disabled={!shouldDisplayPriorityInput}
+            type="text"
+            placeholder="Priority (enum)"
+            value={priority}
+            onChange={e => this.setState({ priority: e.target.value })}
+          />
+          <input
+            disabled={!shouldDisplayAssignedToInput}
+            type="text"
+            placeholder="Assigned To (int)"
+            value={assigned_to}
+            onChange={e => this.setState({ assigned_to: e.target.value })}
+          />
 
           <button type="submit">Submit</button>
         </form>
         <h3>{`Last sent: ${lastRequest}`}</h3>
         <p>
           {
-            response.map((todo, i) => {
+            response.map((issue, i) => {
               return (
                 <li key={i}>
                   { 
-                    todo ? Object.entries(todo).map(([key, value]) => {
+                    issue ? Object.entries(issue).map(([key, value]) => {
                       return `${key}: ${value}   `
                     }) : undefined
                   }
