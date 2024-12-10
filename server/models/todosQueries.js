@@ -19,7 +19,6 @@ async function update(id, properties) {
     return results[0];
 }
 
-// delete is a reserved keyword
 async function del(id) {
     const results = await knex('todos').where({ id }).del().returning('*');
     return results[0];
