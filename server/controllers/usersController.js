@@ -1,5 +1,32 @@
 const _ = require('lodash');
 const users = require('../models/usersQueries.js');
+const jwt = require('jsonwebtoken');
+
+const SECRET_KEY = process.env.JWT_SECRET
+
+async function login(req, res) {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).send("Missing required fields: email or password.");
+    }
+
+    try {
+        const user = await users.findByEmail(email);
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).send("Invalid email or password.");
+        }
+        const token = jwt.sign(
+            { id: user.user_id, email: user.email },
+            SECRET_KEY,
+            { expiresIn: '1h' }
+        );
+        res.json({ token });
+    } catch (err) {
+        console.error("Error during login:", err);
+        res.status(500).send("Error logging in.");
+    }
+}
 
 function createUser(req, data) {
     const protocol = req.protocol,

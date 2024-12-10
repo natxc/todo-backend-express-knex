@@ -1,4 +1,5 @@
 const knex = require("../config/connection.js");
+const bcrypt = require('bcrypt');
 
 async function all() {
     return knex('users');
@@ -10,8 +11,9 @@ async function get(id) {
 }
 
 async function create({ name, email, password }) {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const results = await knex('users')
-        .insert({ name, email, password })
+        .insert({ name, email, password: hashedPassword })
         .returning('*');
     return results[0];
 }
@@ -34,6 +36,9 @@ async function clear() {
     return [];
 }
 
+async function findByEmail(email) {
+    return knex('users').where({ email }).first();
+}
 
 module.exports = {
     all,
@@ -41,5 +46,6 @@ module.exports = {
     create,
     update,
     delete: del,
-    clear
-}
+    clear,
+    findByEmail
+};
