@@ -14,6 +14,8 @@ import TeamsPage from './pages/Teams/TeamsPage';
 import TeamDetailsPage from './pages/Teams/TeamDetailsPage';
 import ApiDocsRedirect from './pages/ApiDocsRedirect';
 import Notes from './pages/Notes';
+import CreateTeamPage from './pages/Teams/CreateTeamPage';
+import EditTeamPage from './pages/Teams/EditTeamPage';
 
 const App = () => {
   return (
@@ -30,7 +32,9 @@ const App = () => {
                 <Route path="/issues" element={<IssuesPage />} />
                 <Route path="/issues/:id" element={<IssueDetailsPage />} />
                 <Route path="/teams" element={<TeamsPage />} />
+                <Route path="/teams/new" element={<CreateTeamPage />} />
                 <Route path="/teams/:id" element={<TeamDetailsPage />} />
+                <Route path="/teams/:id/edit" element={<EditTeamPage />} />
                 <Route path="/docs" element={<ApiDocsRedirect />} />
                 <Route path="/notes" element={<Notes />} /> 
               </Routes>

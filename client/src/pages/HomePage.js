@@ -6,9 +6,6 @@ import IssuesContext from '../context/IssuesContext';
 import TeamsContext from '../context/TeamsContext';
 import Button from '../components/Button';
 
-
-
-
 const HomePage = () => {
     const { projects, fetchProjects } = useContext(ProjectsContext);
     const { issues, fetchIssues } = useContext(IssuesContext);
@@ -69,8 +66,8 @@ const HomePage = () => {
                 <h2>Your Teams</h2>
                 <ul>
                     {teams.map((team) => (
-                        <li key={team.id}>
-                            <Link to={`/teams/${team.id}`}>{team.name}</Link>
+                        <li key={team.team_id}>
+                            <Link to={`/teams/${team.team_id}`}>{team.name}</Link>
                         </li>
                     ))}
                 </ul>
