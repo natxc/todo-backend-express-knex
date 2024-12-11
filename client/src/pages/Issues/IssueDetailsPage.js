@@ -12,7 +12,7 @@ const IssueDetailsPage = () => {
 
     useEffect(() => {
         const loadIssueDetails = async () => {
-            const currentIssue = issues.find((issue) => issue.id === id);
+            const currentIssue = issues.find((issue) => issue.issue_id === Number(id));
             setIssue(currentIssue);
             if (currentIssue) {
                 const fetchedComments = await fetchComments(id);
@@ -51,7 +51,7 @@ const IssueDetailsPage = () => {
                 {comments.length > 0 ? (
                     <ul className="comments-list">
                         {comments.map((comment) => (
-                            <li key={comment.id} className="comment">
+                            <li key={comment.comment_id} className="comment">
                                 <p><strong>{comment.author}</strong>: {comment.content}</p>
                             </li>
                         ))}
