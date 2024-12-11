@@ -27,7 +27,11 @@ const path = require('path');
 
 // app.use(express.json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.get('/swagger.json', (req, res) => {
+  res.sendFile(path.join(__dirname, '/docs/swagger.json'));
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, { swaggerUrl: '/swagger.json' }));
 
 app.use('/issues', issuesRoute);
 app.use('/teams', teamsRoutes);
