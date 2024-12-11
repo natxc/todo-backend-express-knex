@@ -1,29 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 import ProjectsContext from '../../context/ProjectsContext';
 
 const TeamDetailsPage = () => {
     const { id } = useParams();
+    const { state } = useLocation();
     const { teams, fetchTeams } = useContext(TeamsContext);
     const { projects, fetchProjects } = useContext(ProjectsContext);
-    const [team, setTeam] = useState(null);
+    const [team, setTeam] = useState(state?.updatedTeam || null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const loadTeamDetails = async () => {
-            if (teams.length === 0) {
+            if (!state?.updatedTeam && teams.length === 0) {
                 await fetchTeams();
             }
-            const currentTeam = teams.find((team) => team.team_id === Number(id));
+            const currentTeam =
+                state?.updatedTeam || teams.find((team) => team.team_id === Number(id));
             setTeam(currentTeam);
-            await fetchProjects();
             setLoading(false);
         };
 
         loadTeamDetails();
-    }, [id, teams, fetchTeams, fetchProjects]);
+    }, [id, teams, state, fetchTeams, fetchProjects]);
 
     if (loading) {
         return <div className="loading">Loading team details...</div>;

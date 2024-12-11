@@ -16,18 +16,27 @@ const EditTeamPage = () => {
         fetchTeam();
     }, [id]);
 
-    const handleUpdateTeam = async (data) => {
+    const handleUpdateTeam = async (updatedData) => {
         try {
-            await fetch(`/teams/${id}`, {
-                method: 'PUT',
+            const response = await fetch(`/teams/${id}`, {
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(updatedData),
             });
-            navigate(`/teams/${id}`);
+
+            if (!response.ok) {
+                throw new Error(`Failed to update team: ${response.statusText}`);
+            }
+
+            const updatedTeam = await response.json();
+            console.log('Team updated successfully:', updatedTeam);
+
+            navigate(`/teams/${id}`, { state: { updatedTeam } });
         } catch (error) {
             console.error('Error updating team:', error);
         }
     };
+
 
     if (!teamData) {
         return <div>Loading...</div>;

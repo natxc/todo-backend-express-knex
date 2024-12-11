@@ -10,7 +10,7 @@ async function get(id) {
 }
 
 async function create(name) {
-    const results = await knex('teams').insert({ name }).returning('*');
+    const results = await knex('teams').insert(name).returning('*');
     return results[0];
 }
 
