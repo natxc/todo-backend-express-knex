@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ProjectsContext from '../context/ProjectsContext';
+import ProjectsContext from '../../context/ProjectsContext';
 
 const ProjectsPage = () => {
     const { projects, fetchProjects } = useContext(ProjectsContext);

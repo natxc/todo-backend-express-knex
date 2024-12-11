@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
-import ProjectsPage from './pages/ProjectsPage';
-import ProjectDetailsPage from './pages/ProjectDetailsPage';
-import IssuesPage from './pages/IssuesPage';
-import IssueDetailsPage from './pages/IssueDetailsPage';
-import TeamsPage from './pages/TeamsPage';
-import TeamDetailsPage from './pages/TeamDetailsPage';
+import ProjectsPage from './pages/Projects/ProjectsPage';
+import ProjectDetailsPage from './pages/Projects/ProjectDetailsPage';
+import IssuesPage from './pages/Issues/IssuesPage';
+import IssueDetailsPage from './pages/Issues/IssueDetailsPage';
+import TeamsPage from './pages/Teams/TeamsPage';
+import TeamDetailsPage from './pages/Teams/TeamDetailsPage';
 
 const AppRoutes = () => (
     <BrowserRouter>

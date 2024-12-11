@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import TeamsContext from '../context/TeamsContext';
-import ProjectsContext from '../context/ProjectsContext';
+import TeamsContext from '../../context/TeamsContext';
+import ProjectsContext from '../../context/ProjectsContext';
 
 const TeamDetailsPage = () => {
     const { id } = useParams();

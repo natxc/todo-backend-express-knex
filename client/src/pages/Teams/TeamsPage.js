@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import TeamsContext from '../context/TeamsContext';
+import TeamsContext from '../../context/TeamsContext';
 
 const TeamsPage = () => {
     const { teams, fetchTeams } = useContext(TeamsContext);

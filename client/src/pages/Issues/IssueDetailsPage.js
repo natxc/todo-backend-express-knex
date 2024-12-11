@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchComments } from '../api/comments';
-import IssuesContext from '../context/IssuesContext';
+import { fetchComments } from '../../api/comments';
+import IssuesContext from '../../context/IssuesContext';
 
 const IssueDetailsPage = () => {
     const { id } = useParams();
