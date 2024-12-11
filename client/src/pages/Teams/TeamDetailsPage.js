@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 import ProjectsContext from '../../context/ProjectsContext';
+import '../../styles/Team.css';
 
 const TeamDetailsPage = () => {
     const { id } = useParams();
@@ -50,8 +51,8 @@ const TeamDetailsPage = () => {
                 {teamProjects.length > 0 ? (
                     <ul className="projects-list">
                         {teamProjects.map((project) => (
-                            <li key={project.id} className="project-item">
-                                <Link to={`/projects/${project.id}`} className="project-link">
+                            <li key={project.project_id} className="project-item">
+                                <Link to={`/projects/${project.project_id}`} className="project-link">
                                     <h3>{project.name}</h3>
                                     <p>{project.description}</p>
                                 </Link>
