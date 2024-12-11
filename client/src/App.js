@@ -6,12 +6,12 @@ import { TeamsProvider } from './context/TeamsContext';
 import { AuthProvider } from './context/AuthContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import ProjectsPage from './pages/ProjectsPage';
-import ProjectDetailsPage from './pages/ProjectDetailsPage';
-import IssuesPage from './pages/IssuesPage';
-import IssueDetailsPage from './pages/IssueDetailsPage';
-import TeamsPage from './pages/TeamsPage';
-import TeamDetailsPage from './pages/TeamDetailsPage';
+import ProjectsPage from './pages/Projects/ProjectsPage';
+import ProjectDetailsPage from './pages/Projects/ProjectDetailsPage';
+import IssuesPage from './pages/Issues/IssuesPage';
+import IssueDetailsPage from './pages/Issues/IssueDetailsPage';
+import TeamsPage from './pages/Teams/TeamsPage';
+import TeamDetailsPage from './pages/Teams/TeamDetailsPage';
 import ApiDocsRedirect from './pages/ApiDocsRedirect';
 import Notes from './pages/Notes';
 

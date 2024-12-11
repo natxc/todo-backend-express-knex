@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ProjectsContext from '../context/ProjectsContext';
-import IssuesContext from '../context/IssuesContext';
+import ProjectsContext from '../../context/ProjectsContext';
+import IssuesContext from '../../context/IssuesContext';
 
 const ProjectDetailsPage = () => {
     const { id } = useParams();

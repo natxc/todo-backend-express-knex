@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import IssuesContext from '../context/IssuesContext';
+import IssuesContext from '../../context/IssuesContext';
 
 const IssuesPage = () => {
     const { issues, fetchIssues } = useContext(IssuesContext);
