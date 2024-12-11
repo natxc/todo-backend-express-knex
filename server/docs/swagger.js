@@ -10,7 +10,10 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:5000',
+                url: process.env.NODE_ENV === 'production'
+                    ? 'https://nc-todo-app-1c0a22c0be57.herokuapp.com/'
+                    : 'http://localhost:5000',
+
             },
         ],
         components: {
