@@ -34,7 +34,6 @@ const TeamsPage = () => {
                                 <li key={team.team_id} className="team-item">
                                     <Link to={`/teams/${team.team_id}`} className="team-link">
                                         <h2>{team.name}</h2>
-                                        <p>{team.description}</p>
                                     </Link>
                                 </li>
                             ))}
