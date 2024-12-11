@@ -141,7 +141,34 @@ ul li {
 .primary-btn {
     font-weight: bold;
     width: 100%;
-    /* Optional, for full-width buttons */
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(90deg, #81C784, #4CAF50);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.primary-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.primary-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #888;
 }
 
 .docs-section {
