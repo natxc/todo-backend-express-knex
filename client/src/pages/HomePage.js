@@ -38,8 +38,8 @@ const HomePage = () => {
                 <h2>Projects</h2>
                 <ul>
                     {projects.map((project) => (
-                        <li key={project.id}>
-                            <Link to={`/projects/${project.id}`}>{project.name}</Link>
+                        <li key={project.project_id}>
+                            <Link to={`/projects/${project.project_id}`}>{project.name}</Link>
                         </li>
                     ))}
                 </ul>
@@ -52,8 +52,8 @@ const HomePage = () => {
                 <h2>Your Issues</h2>
                 <ul>
                     {issues.slice(0, 5).map((issue) => (
-                        <li key={issue.id}>
-                            <Link to={`/issues/${issue.id}`}>{issue.title}</Link>
+                        <li key={issue.issue_id}>
+                            <Link to={`/issues/${issue.issue_id}`}>{issue.title}</Link>
                         </li>
                     ))}
                 </ul>
