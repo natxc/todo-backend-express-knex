@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import IssuesContext from '../../context/IssuesContext';
 
 const IssuesPage = () => {
     const { issues, fetchIssues } = useContext(IssuesContext);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadIssues = async () => {
@@ -22,7 +23,7 @@ const IssuesPage = () => {
         <div className="issues-page">
             <header>
                 <h1>All Issues</h1>
-                {/* <button className='submit-btn' onClick={() => navigate('/issues/new')}>Create Issue</button> */}
+                <button className='submit-btn' onClick={() => navigate('/issues/new')}>Create Issue</button>
             </header>
 
             <section className="issues-list-section">
