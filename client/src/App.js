@@ -10,6 +10,8 @@ import Notes from './pages/Notes';
 import { ProjectsProvider } from './context/ProjectsContext';
 import ProjectsPage from './pages/Projects/ProjectsPage';
 import ProjectDetailsPage from './pages/Projects/ProjectDetailsPage';
+import CreateProjectPage from './pages/Projects/CreateProjectsPage';
+import EditProjectPage from './pages/Projects/EditProjectPage';
 
 import { IssuesProvider } from './context/IssuesContext';
 import IssuesPage from './pages/Issues/IssuesPage';
@@ -35,11 +37,13 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
 
                 <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/projects/new" element={<CreateProjectPage />} />
                 <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+                <Route path="/projects/:id/edit" element={<EditProjectPage />} />
 
                 <Route path="/issues" element={<IssuesPage />} />
-                <Route path="/issues/:id" element={<IssueDetailsPage />} />
                 <Route path="/issues/new" element={<CreateIssuePage />} />
+                <Route path="/issues/:id" element={<IssueDetailsPage />} />
                 <Route path="/issues/:id/edit" element={<EditIssuePage />} />
 
                 <Route path="/teams" element={<TeamsPage />} />
