@@ -3,12 +3,12 @@ import '../../styles/Issue.css';
 
 const IssueForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const [formData, setFormData] = useState({
-        name: initialData.name || ''
+        title: initialData.title || ''
     });
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+        const { title, value } = event.target;
+        setFormData({ ...formData, [title]: value });
     };
 
     const handleSubmit = (event) => {
@@ -19,14 +19,14 @@ const IssueForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     return (
         <form onSubmit={handleSubmit} className="issue-form">
             <div className="form-group">
-                <label htmlFor="name">Issue Name:</label>
+                <label htmlFor="title">Issue Name:</label>
                 <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="title"
+                    title="title"
+                    value={formData.title}
                     onChange={handleChange}
-                    placeholder="Enter issue name"
+                    placeholder="Enter issue title"
                     required
                 />
             </div>
