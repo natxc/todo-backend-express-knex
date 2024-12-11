@@ -28,11 +28,6 @@ const path = require('path');
 // app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use('/api/issues', issuesRoute);
-app.use('/api/teams', teamsRoutes);
-app.use('/api/projects', projectsRoutes);
-app.use('/api/users', usersRoutes);
-app.use('/api/comments', commentsRoutes);
 
 app.use('/issues', issuesRoute);
 app.use('/teams', teamsRoutes);
