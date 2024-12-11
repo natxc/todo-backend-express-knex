@@ -5,18 +5,53 @@ const TeamsContext = createContext();
 export const TeamsProvider = ({ children }) => {
     const [teams, setTeams] = useState([]);
 
-    const fetchTeams = async () => {
+    const createTeam = async (teamData) => {
         try {
-            const response = await fetch('/api/teams');
-            const data = await response.json();
-            setTeams(data);
+            const response = await fetch('/teams', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(teamData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create team');
+            }
+
+            const newTeam = await response.json();
+            setTeams((prevTeams) => [...prevTeams, newTeam]);
         } catch (error) {
-            console.error('Failed to fetch teams', error);
+            console.error('Error creating team:', error);
+            throw error;
         }
     };
 
+    const fetchTeams = async () => {
+        try {
+            const response = await fetch('/teams');
+            const data = await response.json();
+            setTeams(data);
+        } catch (error) {
+            console.error('Failed to fetch teams:', error);
+        }
+    };
+
+
+    const updateTeam = async (id, teamData) => {
+        await fetch(`/teams/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(teamData),
+        });
+        fetchTeams();
+    };
+
+    const deleteTeam = async (id) => {
+        await fetch(`/teams/${id}`, { method: 'DELETE' });
+        setTeams((prevTeams) => prevTeams.filter((team) => team.team_id !== id));
+    };
+
     return (
-        <TeamsContext.Provider value={{ teams, fetchTeams }}>
+        <TeamsContext.Provider value={{ teams, createTeam, fetchTeams, updateTeam, deleteTeam }}>
             {children}
         </TeamsContext.Provider>
     );

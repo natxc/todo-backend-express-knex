@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 
 const TeamsPage = () => {
     const { teams, fetchTeams } = useContext(TeamsContext);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadTeams = async () => {
@@ -22,22 +23,26 @@ const TeamsPage = () => {
         <div className="teams-page">
             <header>
                 <h1>All Teams</h1>
+                <button onClick={() => navigate('/teams/new')}>Create Team</button>
             </header>
 
             <section className="teams-list-section">
                 {teams.length > 0 ? (
                     <ul className="teams-list">
-                        {teams.map((team) => (
-                            <li key={team.id} className="team-item">
-                                <Link to={`/teams/${team.id}`} className="team-link">
-                                    <h2>{team.name}</h2>
-                                    <p>{team.description}</p>
-                                </Link>
-                            </li>
-                        ))}
+                        <ul>
+                            {teams.map((team) => (
+                                <li key={team.team_id} className="team-item">
+                                    <Link to={`/teams/${team.team_id}`} className="team-link">
+                                        <h2>{team.name}</h2>
+                                        <p>{team.description}</p>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
                     </ul>
                 ) : (
-                    <p>No teams found.</p>
+                    <p>No teams found. </p>
                 )}
             </section>
         </div>
