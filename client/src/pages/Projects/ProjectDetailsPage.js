@@ -12,7 +12,7 @@ const ProjectDetailsPage = () => {
 
     useEffect(() => {
         const loadProjectDetails = async () => {
-            const currentProject = projects.find((project) => project.id === id);
+            const currentProject = projects.find((project) => project.project_id === id);
             setProject(currentProject);
             await fetchIssues();
             setLoading(false);
@@ -43,8 +43,8 @@ const ProjectDetailsPage = () => {
                 {projectIssues.length > 0 ? (
                     <ul className="issues-list">
                         {projectIssues.map((issue) => (
-                            <li key={issue.id} className="issue-item">
-                                <Link to={`/issues/${issue.id}`} className="issue-link">
+                            <li key={issue.issue_id} className="issue-item">
+                                <Link to={`/issues/${issue.issue_id}`} className="issue-link">
                                     <h3>{issue.title}</h3>
                                     <p>Status: <strong>{issue.status}</strong></p>
                                     <p>Priority: <strong>{issue.priority}</strong></p>
