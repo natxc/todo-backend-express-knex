@@ -5,21 +5,24 @@ import ProjectsContext from '../../context/ProjectsContext';
 
 const TeamDetailsPage = () => {
     const { id } = useParams();
-    const { teams } = useContext(TeamsContext);
+    const { teams, fetchTeams } = useContext(TeamsContext);
     const { projects, fetchProjects } = useContext(ProjectsContext);
     const [team, setTeam] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadTeamDetails = async () => {
-            const currentTeam = teams.find((team) => team.id === id);
+            if (teams.length === 0) {
+                await fetchTeams();
+            }
+            const currentTeam = teams.find((team) => team.team_id === Number(id));
             setTeam(currentTeam);
             await fetchProjects();
             setLoading(false);
         };
 
         loadTeamDetails();
-    }, [id, teams, fetchProjects]);
+    }, [id, teams, fetchTeams, fetchProjects]);
 
     if (loading) {
         return <div className="loading">Loading team details...</div>;
@@ -29,7 +32,7 @@ const TeamDetailsPage = () => {
         return <div className="error">Team not found.</div>;
     }
 
-    const teamProjects = projects.filter((project) => project.teamId === id);
+    const teamProjects = projects.filter((project) => project.team_id === Number(id));
 
     return (
         <div className="team-details-page">

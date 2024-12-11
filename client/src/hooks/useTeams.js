@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import TeamsContext from '../context/TeamsContext';
 
 const useTeams = () => {
-    const { teams, fetchTeams } = useContext(TeamsContext);
+    const { teams, fetchTeams, createTeam } = useContext(TeamsContext);
 
     useEffect(() => {
         if (teams.length === 0) {
@@ -10,7 +10,7 @@ const useTeams = () => {
         }
     }, [teams, fetchTeams]);
 
-    return { teams };
+    return { teams, createTeam };
 };
 
 export default useTeams;
