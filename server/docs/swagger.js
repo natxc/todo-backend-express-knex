@@ -79,8 +79,9 @@ const swaggerOptions = {
             },
         },
     },
-    apis: ['../server/routes/*.js'],
+    apis: ['./routes/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+// console.log('Generated Swagger Docs:', JSON.stringify(swaggerDocs, null, 2));
 module.exports = swaggerDocs;
