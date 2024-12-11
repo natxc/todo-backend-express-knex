@@ -59,12 +59,14 @@ module.exports = {
     client: 'pg',
     connection: {
       connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false },
     },
     migrations: {
-      directory: './migrations', // Adjust the path if needed
+      directory: './migrations',
+      tableName: 'knex_migrations',
+    },
+    seeds: {
+      directory: './seeds',
     },
     pool: {
       min: 2,
