@@ -30,8 +30,8 @@ const HomePage = () => {
     return (
         <div className="home-page">
             <header>
-                <h1>Welcome to Jira Lite</h1>
-                <p>Manage your projects, issues, and teams effectively.</p>
+                <h1>Welcome to PMTNODO</h1>
+                <p>Project Management Tracker, Negative One Dot Oh. Manage your projects, issues, and teams in the most simple way.</p>
             </header>
 
             <section className="projects-section">
