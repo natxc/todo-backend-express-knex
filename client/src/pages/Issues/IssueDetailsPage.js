@@ -13,7 +13,7 @@ const IssueDetailsPage = () => {
     const [issue, setIssue] = useState(state?.updatedIssue || null);
     // const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadIssueDetails = async () => {
@@ -43,7 +43,7 @@ const IssueDetailsPage = () => {
         <div className="issue-details-page">
             <header className="issue-header">
                 <h1>{issue.title}</h1>
-                {/* <button onClick={() => navigate(`/issues/${id}/edit`)} className="edit-btn"></button> */}
+                <button onClick={() => navigate(`/issues/${id}/edit`)} className="edit-btn"></button>
                 <p>Status: <strong>{issue.status}</strong></p>
                 <p>Priority: <strong>{issue.priority}</strong></p>
                 <p>Assigned to: <strong>{issue.assignee || 'Unassigned'}</strong></p>
