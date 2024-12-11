@@ -22,19 +22,23 @@ const IssuesPage = () => {
         <div className="issues-page">
             <header>
                 <h1>All Issues</h1>
+                {/* <button className='submit-btn' onClick={() => navigate('/issues/new')}>Create Issue</button> */}
             </header>
 
             <section className="issues-list-section">
                 {issues.length > 0 ? (
                     <ul className="issues-list">
+                        <ul>
                         {issues.map((issue) => (
-                            <li key={issue.id} className="issue-item">
-                                <Link to={`/issues/${issue.id}`} className="issue-link">
+                            <li key={issue.issue_id} className="issue-item">
+                                <Link to={`/issues/${issue.issue_id}`} className="issue-link">
                                     <h2>{issue.title}</h2></Link>
                                     <p>Status: <strong>{issue.status}</strong></p>
                                     <p>Priority: <strong>{issue.priority}</strong></p>
+                                    <p>Description: <strong>{issue.description}</strong></p>
                             </li>
                         ))}
+                        </ul>
                     </ul>
                 ) : (
                     <p>No issues found.</p>

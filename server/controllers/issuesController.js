@@ -7,6 +7,7 @@ function createIssue(req, data) {
         id = data.issue_id;
 
     return {
+        issue_id: id,
         title: data.title,
         description: data.description,
         status: data.status,
@@ -17,7 +18,7 @@ function createIssue(req, data) {
         due_date: data.due_date,
         created_at: data.created_at,
         updated_at: data.updated_at,
-        url: `${protocol}://${host}/issues/${id}`,
+        url: `${protocol}://${host}/${id}`,
     };
 }
 
