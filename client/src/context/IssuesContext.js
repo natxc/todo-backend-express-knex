@@ -7,7 +7,7 @@ export const IssuesProvider = ({ children }) => {
 
     const fetchIssues = async () => {
         try {
-            const response = await fetch('/api/issues');
+            const response = await fetch('/issues');
             const data = await response.json();
             setIssues(data);
         } catch (error) {
