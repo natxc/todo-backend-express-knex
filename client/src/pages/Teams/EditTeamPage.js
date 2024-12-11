@@ -37,6 +37,27 @@ const EditTeamPage = () => {
         }
     };
 
+    const handleDeleteTeam = async () => {
+        const confirmed = window.confirm('Are you sure you want to delete this team?');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`/teams/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to delete team: ${response.statusText}`);
+            }
+
+            console.log('Team deleted successfully');
+            alert('Team deleted successfully!');
+            navigate('/teams'); // Redirect to the teams list page
+        } catch (error) {
+            console.error('Error deleting team:', error);
+            alert('Failed to delete team. Please try again.');
+        }
+    };
 
     if (!teamData) {
         return <div>Loading...</div>;
@@ -50,6 +71,9 @@ const EditTeamPage = () => {
                 initialData={teamData}
                 submitText="Update Team"
             />
+            <button onClick={handleDeleteTeam} className="delete-btn">
+                Delete Team
+            </button>
         </div>
     );
 };

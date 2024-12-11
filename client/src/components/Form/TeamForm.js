@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/TeamForm.css';
+import '../../styles/Team.css';
 
 const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const [formData, setFormData] = useState({
