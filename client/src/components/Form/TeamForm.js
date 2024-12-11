@@ -3,8 +3,7 @@ import '../../styles/TeamForm.css';
 
 const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const [formData, setFormData] = useState({
-        name: initialData.name || '',
-        description: initialData.description || '',
+        name: initialData.name || ''
     });
 
     const handleChange = (event) => {
@@ -29,16 +28,6 @@ const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
                     onChange={handleChange}
                     placeholder="Enter team name"
                     required
-                />
-            </div>
-            <div className="form-group">
-                <label htmlFor="description">Description:</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Enter team description"
                 />
             </div>
             <button type="submit" className="submit-btn">

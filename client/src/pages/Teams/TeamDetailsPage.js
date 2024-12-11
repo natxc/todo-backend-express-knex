@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 import ProjectsContext from '../../context/ProjectsContext';
 
@@ -9,6 +9,7 @@ const TeamDetailsPage = () => {
     const { projects, fetchProjects } = useContext(ProjectsContext);
     const [team, setTeam] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadTeamDetails = async () => {
@@ -38,7 +39,9 @@ const TeamDetailsPage = () => {
         <div className="team-details-page">
             <header className="team-header">
                 <h1>{team.name}</h1>
-                <p>{team.description}</p>
+                <button onClick={() => navigate(`/teams/${id}/edit`)} className="edit-btn">
+                    Edit Team
+                </button>
             </header>
 
             <section className="team-projects-section">
