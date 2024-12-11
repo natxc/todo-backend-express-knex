@@ -28,8 +28,8 @@ const ProjectsPage = () => {
                 {projects.length > 0 ? (
                     <ul className="projects-list">
                         {projects.map((project) => (
-                            <li key={project.id} className="project-item">
-                                <Link to={`/projects/${project.id}`} className="project-link">
+                            <li key={project.project_id} className="project-item">
+                                <Link to={`/projects/${project.project_id}`} className="project-link">
                                     <h2>{project.name}</h2>
                                     <p>{project.description}</p>
                                 </Link>
