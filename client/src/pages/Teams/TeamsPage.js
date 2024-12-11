@@ -23,7 +23,7 @@ const TeamsPage = () => {
         <div className="teams-page">
             <header>
                 <h1>All Teams</h1>
-                <button onClick={() => navigate('/teams/new')}>Create Team</button>
+                <button className='submit-btn' onClick={() => navigate('/teams/new')}>Create Team</button>
             </header>
 
             <section className="teams-list-section">
