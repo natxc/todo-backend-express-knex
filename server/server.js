@@ -4,6 +4,14 @@ global.TextDecoder = TextDecoder;
 
 const app = require("./config/serverConfig.js");
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
+// const app = express();
+
 const issuesRoute = require("./routes/issuesRoutes.js");
 const teamsRoutes = require("./routes/teamsRoutes.js");
 const projectsRoutes = require("./routes/projectsRoutes.js");
@@ -14,7 +22,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./docs/swagger');
 
 const port = process.env.PORT || 5000;
-// const app = express();
+
+const path = require('path');
 
 // app.use(express.json());
 
