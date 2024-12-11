@@ -38,7 +38,6 @@ const TeamsPage = () => {
                                 </li>
                             ))}
                         </ul>
-
                     </ul>
                 ) : (
                     <p>No teams found. </p>
