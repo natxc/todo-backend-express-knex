@@ -30,10 +30,9 @@ const IssuesPage = () => {
                         {issues.map((issue) => (
                             <li key={issue.id} className="issue-item">
                                 <Link to={`/issues/${issue.id}`} className="issue-link">
-                                    <h2>{issue.title}</h2>
+                                    <h2>{issue.title}</h2></Link>
                                     <p>Status: <strong>{issue.status}</strong></p>
                                     <p>Priority: <strong>{issue.priority}</strong></p>
-                                </Link>
                             </li>
                         ))}
                     </ul>
