@@ -59,8 +59,8 @@ const IssueDetailsPage = () => {
                 {relatedProjects.length > 0 ? (
                     <ul className="projects-list">
                         {relatedProjects.map((project) => (
-                            <li key={project.id} className="project-item">
-                                <Link to={`/projects/${project.id}`} className="project-link">
+                            <li key={project.project_id} className="project-item">
+                                <Link to={`/projects/${project.project_id}`} className="project-link">
                                     <h3>{project.name}</h3>
                                     <p>{project.description}</p>
                                 </Link>
