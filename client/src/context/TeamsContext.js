@@ -28,22 +28,41 @@ export const TeamsProvider = ({ children }) => {
     const fetchTeams = async () => {
         try {
             const response = await fetch('/teams');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
-            setTeams(data);
+            console.log('Fetched teams:', data);
+            return data;
         } catch (error) {
-            console.error('Failed to fetch teams:', error);
+            console.error('Error fetching teams:', error);
+            return [];
         }
     };
 
 
     const updateTeam = async (id, teamData) => {
-        await fetch(`/teams/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(teamData),
-        });
-        fetchTeams();
+        try {
+            const response = await fetch(`/teams/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(teamData),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update team');
+            }
+
+            const updatedTeam = await response.json();
+            setTeams((prevTeams) =>
+                prevTeams.map((team) =>
+                    team.team_id === id ? { ...team, ...updatedTeam } : team
+                )
+            );
+        } catch (error) {
+            console.error('Error updating team:', error);
+        }
     };
+
 
     const deleteTeam = async (id) => {
         await fetch(`/teams/${id}`, { method: 'DELETE' });
