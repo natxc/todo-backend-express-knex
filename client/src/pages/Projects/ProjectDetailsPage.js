@@ -1,25 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import ProjectsContext from '../../context/ProjectsContext';
-import IssuesContext from '../../context/IssuesContext';
+import '../../styles/Project.css';
 
 const ProjectDetailsPage = () => {
     const { id } = useParams();
-    const { projects } = useContext(ProjectsContext);
-    const { issues, fetchIssues } = useContext(IssuesContext);
-    const [project, setProject] = useState(null);
+    const { state } = useLocation();
+    const { projects, fetchProjects } = useContext(ProjectsContext);
+    const [project, setProject] = useState(state?.updatedProject || null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadProjectDetails = async () => {
-            const currentProject = projects.find((project) => project.project_id === id);
+            if (!state?.updatedProject && projects.length === 0) {
+                await fetchProjects();
+            }
+            const currentProject =
+                state?.updatedProject || projects.find((project) => project.project_id === Number(id));
             setProject(currentProject);
-            await fetchIssues();
             setLoading(false);
         };
 
         loadProjectDetails();
-    }, [id, projects, fetchIssues]);
+    }, [id, projects, state, fetchProjects ]);
 
     if (loading) {
         return <div className="loading">Loading project details...</div>;
@@ -29,31 +33,32 @@ const ProjectDetailsPage = () => {
         return <div className="error">Project not found.</div>;
     }
 
-    const projectIssues = issues.filter((issue) => issue.projectId === id);
+    const projectProjects = projects.filter((project) => project.project_id === Number(id));
 
     return (
         <div className="project-details-page">
             <header className="project-header">
                 <h1>{project.name}</h1>
-                <p>{project.description}</p>
+                <button onClick={() => navigate(`/projects/${id}/edit`)} className="edit-btn">
+                    Edit Project
+                </button>
             </header>
 
-            <section className="project-issues-section">
-                <h2>Issues</h2>
-                {projectIssues.length > 0 ? (
-                    <ul className="issues-list">
-                        {projectIssues.map((issue) => (
-                            <li key={issue.issue_id} className="issue-item">
-                                <Link to={`/issues/${issue.issue_id}`} className="issue-link">
-                                    <h3>{issue.title}</h3>
-                                    <p>Status: <strong>{issue.status}</strong></p>
-                                    <p>Priority: <strong>{issue.priority}</strong></p>
+            <section className="project-projects-section">
+                <h2>Projects</h2>
+                {projectProjects.length > 0 ? (
+                    <ul className="projects-list">
+                        {projectProjects.map((project) => (
+                            <li key={project.project_id} className="project-item">
+                                <Link to={`/projects/${project.project_id}`} className="project-link">
+                                    <h3>{project.name}</h3>
+                                    <p>{project.description}</p>
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p>No issues found for this project.</p>
+                    <p>No projects found for this project.</p>
                 )}
             </section>
         </div>
