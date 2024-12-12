@@ -1,14 +1,27 @@
 export const login = async (credentials) => {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch('/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
     });
-    if (!response.ok) throw new Error('Login failed');
+    if (!response.ok) {
+        const errorDetails = await response.text();
+        console.error('Login error:', errorDetails);
+        throw new Error('Login failed');
+    }
     return response.json();
 };
 
-export const logout = async () => {
-    const response = await fetch('/api/auth/logout', { method: 'POST' });
-    if (!response.ok) throw new Error('Logout failed');
+export const register = async (credentials) => {
+    const response = await fetch('/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+    });
+    if (!response.ok) {
+        const errorDetails = await response.text();
+        console.error('Registration error:', errorDetails);
+        throw new Error('Registration failed');
+    }
+    return response.json();
 };

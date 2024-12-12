@@ -1,5 +1,6 @@
 const express = require('express');
 const usersController = require('../controllers/usersController.js');
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-router.get('/', usersController.getAllUsers);
+router.get('/', authenticateToken, usersController.getAllUsers);
 
 /**
  * @swagger
@@ -136,5 +137,7 @@ router.delete('/', usersController.deleteAllUsers);
  *         description: User not found
  */
 router.delete('/:id', usersController.deleteUser);
+
+router.post('/login', usersController.login);
 
 module.exports = router;

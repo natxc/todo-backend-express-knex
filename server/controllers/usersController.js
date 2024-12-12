@@ -1,11 +1,22 @@
 const _ = require('lodash');
 const users = require('../models/usersQueries.js');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const SECRET_KEY = process.env.JWT_SECRET
 
+function generateToken(user) {
+    return jwt.sign(
+        { id: user.user_id, email: user.email },
+        SECRET_KEY,
+        { expiresIn: '1h' }
+    );
+}
+
 async function login(req, res) {
     const { email, password } = req.body;
+
+    console.log('Login attempt:', { email, password });
 
     if (!email || !password) {
         return res.status(400).send("Missing required fields: email or password.");
@@ -13,20 +24,30 @@ async function login(req, res) {
 
     try {
         const user = await users.findByEmail(email);
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        console.log('User fetched from DB:', user);
+
+        if (!user) {
             return res.status(401).send("Invalid email or password.");
         }
-        const token = jwt.sign(
-            { id: user.user_id, email: user.email },
-            SECRET_KEY,
-            { expiresIn: '1h' }
-        );
-        res.json({ token });
+
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        console.log('Password match result:', isPasswordMatch);
+
+        if (!isPasswordMatch) {
+            return res.status(401).send("Invalid email or password.");
+        }
+
+        const token = generateToken(user);
+        console.log('Generated JWT token:', token);
+
+        res.json({ token, user: { id: user.user_id, email: user.email, name: user.name } });
     } catch (err) {
         console.error("Error during login:", err);
-        res.status(500).send("Error logging in.");
+        res.status(500).send("Internal server error.");
     }
 }
+
+
 
 function createUser(req, data) {
     const protocol = req.protocol,
@@ -55,6 +76,7 @@ async function getUser(req, res) {
 
 async function postUser(req, res) {
     const { name, email, password } = req.body;
+    console.log('Incoming request to create user:', { name, email }); // Debug log
 
     if (!name || !email || !password) {
         return res.status(400).send("Missing required fields: name, email, or password.");
@@ -62,10 +84,14 @@ async function postUser(req, res) {
 
     try {
         const created = await users.create({ name, email, password });
-        return res.send(createUser(req, created));
+        console.log('User created successfully:', created);
+        return res.status(201).send(createUser(req, created));
     } catch (err) {
         console.error("Error creating user:", err);
-        res.status(500).send("Error creating user.");
+        if (err.code === '23505') {
+            return res.status(400).send("Email already exists.");
+        }
+        return res.status(500).send("Error creating user.");
     }
 }
 
@@ -106,17 +132,12 @@ function addErrorReporting(func, message) {
     };
 }
 
-const toExport = {
-    getAllUsers: { method: getAllUsers, errorMessage: "Could not fetch all users" },
-    getUser: { method: getUser, errorMessage: "Could not fetch user" },
-    postUser: { method: postUser, errorMessage: "Could not post user" },
-    patchUser: { method: patchUser, errorMessage: "Could not patch user" },
-    deleteAllUsers: { method: deleteAllUsers, errorMessage: "Could not delete all users" },
-    deleteUser: { method: deleteUser, errorMessage: "Could not delete user" }
-}
-
-for (let route in toExport) {
-    toExport[route] = addErrorReporting(toExport[route].method, toExport[route].errorMessage);
-}
-
-module.exports = toExport;
+module.exports = {
+    getAllUsers: addErrorReporting(getAllUsers, "Could not fetch all users"),
+    getUser: addErrorReporting(getUser, "Could not fetch user"),
+    postUser: addErrorReporting(postUser, "Could not post user"),
+    patchUser: addErrorReporting(patchUser, "Could not patch user"),
+    deleteAllUsers: addErrorReporting(deleteAllUsers, "Could not delete all users"),
+    deleteUser: addErrorReporting(deleteUser, "Could not delete user"),
+    login: addErrorReporting(login, "Could not log in"),
+};
