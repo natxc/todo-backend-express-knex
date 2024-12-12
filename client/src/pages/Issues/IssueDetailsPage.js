@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import IssuesContext from '../../context/IssuesContext';
 import ProjectsContext from '../../context/ProjectsContext';
-// import { fetchComments } from '../../api/comments';
 import '../../styles/Issue.css';
 
 const IssueDetailsPage = () => {
