@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import IssuesContext from '../../context/IssuesContext';
+import Navbar from '../../components/Navbar';
 
 const IssuesPage = () => {
     const { issues, fetchIssues } = useContext(IssuesContext);
@@ -22,9 +23,10 @@ const IssuesPage = () => {
     return (
         <div className="issues-page">
             <header>
+                <Navbar />
+            </header>
                 <h1>All Issues</h1>
                 <button className='submit-btn' onClick={() => navigate('/issues/new')}>Create Issue</button>
-            </header>
 
             <section className="issues-list-section">
                 {issues.length > 0 ? (

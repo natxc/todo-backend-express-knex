@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import IssueForm from '../../components/Form/IssueForm';
+import Navbar from '../../components/Navbar';
 
 const EditIssuePage = () => {
     const { id } = useParams();
@@ -65,6 +66,9 @@ const EditIssuePage = () => {
 
     return (
         <div className="edit-issue-page">
+            <header>
+                <Navbar />
+            </header>
             <h1>Edit Issue</h1>
             <IssueForm
                 onSubmit={handleUpdateIssue}

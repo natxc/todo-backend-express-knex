@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProjectForm from '../../components/Form/ProjectForm';
+import Navbar from '../../components/Navbar';
 
 const EditProjectPage = () => {
     const { id } = useParams();
@@ -65,6 +66,9 @@ const EditProjectPage = () => {
 
     return (
         <div className="edit-project-page">
+            <header>
+                <Navbar />
+            </header>
             <h1>Edit Project</h1>
             <ProjectForm
                 onSubmit={handleUpdateProject}

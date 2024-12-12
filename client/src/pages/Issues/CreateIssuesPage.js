@@ -2,6 +2,7 @@ import { React, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import IssueForm from '../../components/Form/IssueForm';
 import IssuesContext from '../../context/IssuesContext';
+import Navbar from '../../components/Navbar';
 
 const CreateIssuePage = () => {
     const { createIssue } = useContext(IssuesContext);
@@ -18,6 +19,9 @@ const CreateIssuePage = () => {
 
     return (
         <div className="create-issue-page">
+            <header>
+                <Navbar />
+            </header>
             <h1>Create a New Issue</h1>
             <IssueForm onSubmit={handleCreateIssue} submitText="Create Issue" />
         </div>
