@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import ProjectsContext from '../context/ProjectsContext';
 
 const useProjects = () => {
-    const { projects, fetchProjects } = useContext(ProjectsContext);
+    const { projects, fetchProjects, createProject } = useContext(ProjectsContext);
 
     useEffect(() => {
         if (projects.length === 0) {
@@ -10,7 +10,7 @@ const useProjects = () => {
         }
     }, [projects, fetchProjects]);
 
-    return { projects };
+    return { projects, createProject };
 };
 
 export default useProjects;
