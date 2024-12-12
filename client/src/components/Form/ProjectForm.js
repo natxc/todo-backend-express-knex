@@ -2,28 +2,21 @@ import React, { useState, useEffect, useContext } from 'react';
 import TeamsContext from '../../context/TeamsContext';
 
 const ProjectForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
-    const { fetchTeams } = useContext(TeamsContext);
-
+    const { teams, fetchTeams } = useContext(TeamsContext);
     const [formData, setFormData] = useState({
         name: initialData.name || '',
-        team_id: initialData.team_id || ''
+        team_id: initialData.team_id || '',
     });
-
-    const [teams, setTeams] = useState([]);
 
     useEffect(() => {
         const loadTeams = async () => {
-            try {
-                const teamData = await fetchTeams();
-                setTeams(teamData || []);
-            } catch (error) {
-                console.error('Failed to fetch teams:', error);
-                setTeams([]);
+            if (teams.length === 0) {
+                console.log('Fetching teams for dropdown...');
+                await fetchTeams();
             }
         };
         loadTeams();
-    }, [fetchTeams]);
-
+    }, [fetchTeams, teams]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -60,11 +53,15 @@ const ProjectForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
                     required
                 >
                     <option value="" disabled>Select a team</option>
-                    {teams.map((team) => (
-                        <option key={team.team_id} value={team.team_id}>
-                            {team.name}
-                        </option>
-                    ))}
+                    {teams.length > 0 ? (
+                        teams.map((team) => (
+                            <option key={team.team_id} value={team.team_id}>
+                                {team.name}
+                            </option>
+                        ))
+                    ) : (
+                        <option value="" disabled>No teams available</option>
+                    )}
                 </select>
             </div>
 

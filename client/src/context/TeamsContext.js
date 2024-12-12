@@ -28,15 +28,12 @@ export const TeamsProvider = ({ children }) => {
     const fetchTeams = async () => {
         try {
             const response = await fetch('/teams');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
             const data = await response.json();
-            console.log('Fetched teams:', data);
-            return data;
+            console.log('Fetched teams in TeamsContext:', data);
+            setTeams(data);
+            console.log('Updated teams state in TeamsContext:', teams);
         } catch (error) {
-            console.error('Error fetching teams:', error);
-            return [];
+            console.error('Failed to fetch teams:', error);
         }
     };
 
