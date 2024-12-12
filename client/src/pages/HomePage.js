@@ -87,7 +87,7 @@ const HomePage = () => {
                 </Button>
                 <br /><br />
                 <h2>Developer's Notes</h2>
-                <p>Access notes and other musings/learnings from thsis project:</p>
+                <p>Access notes and other musings/learnings from this project:</p>
                 <Button onClick={() => navigate('/notes')} className="docs-btn">
                     View Notes
                 </Button>
