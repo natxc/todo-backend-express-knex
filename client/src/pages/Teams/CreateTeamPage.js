@@ -22,8 +22,10 @@ const CreateTeamPage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
             <h1>Create a New Team</h1>
             <TeamForm onSubmit={handleCreateTeam} submitText="Create Team" />
+            </main>
         </div>
     );
 };

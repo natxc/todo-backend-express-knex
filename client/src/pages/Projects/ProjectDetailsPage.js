@@ -41,6 +41,7 @@ const ProjectDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
                 <h1>{project.name}</h1>
             <Button onClick={() => navigate(`/projects/${id}/edit`)} >
                     Edit Project
@@ -63,6 +64,7 @@ const ProjectDetailsPage = () => {
                     <p>No projects found for this project.</p>
                 )}
             </section>
+            </main>
         </div>
     );
 };

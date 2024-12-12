@@ -70,6 +70,7 @@ const EditProjectPage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
             <h1>Edit Project</h1>
             <ProjectForm
                 onSubmit={handleUpdateProject}
@@ -83,6 +84,7 @@ const EditProjectPage = () => {
             >
                 Delete Issue
             </Button>
+            </main>
         </div>
     );
 };

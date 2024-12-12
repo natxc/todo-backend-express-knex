@@ -337,3 +337,9 @@ ul li {
     text-decoration: underline;
     color: #0056b3;
 }
+
+.main-content {
+    margin-top: calc(var(--spacing-medium) + 6rem);
+    padding: var(--spacing-medium);
+    padding-bottom: 2rem;
+}

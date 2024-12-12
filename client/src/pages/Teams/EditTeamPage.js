@@ -70,6 +70,7 @@ const EditTeamPage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
             <h1>Edit Team</h1>
             <TeamForm
                 onSubmit={handleUpdateTeam}
@@ -83,6 +84,7 @@ const EditTeamPage = () => {
             >
                 Delete Issue
             </Button>
+            </main>
         </div>
     );
 };

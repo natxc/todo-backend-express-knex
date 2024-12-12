@@ -43,6 +43,7 @@ const TeamDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
 
                 <h1>{team.name}</h1>
                 <button onClick={() => navigate(`/teams/${id}/edit`)} className="edit-btn">
@@ -67,6 +68,7 @@ const TeamDetailsPage = () => {
                     <p>No projects found for this team.</p>
                 )}
             </section>
+            </main>
         </div>
     );
 };

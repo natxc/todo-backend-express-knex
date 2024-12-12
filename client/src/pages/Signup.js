@@ -28,7 +28,8 @@ const SignupPage = () => {
 
     return (
         <div className="signup-page">
-            <h1 className="signup-header">Sign Up</h1>
+            <div style={{ marginBottom: '10rem' }}></div>
+             <h1 className="login-header">Sign Up</h1> {/* TODO: switch to signup or make a generic one */}
             <form onSubmit={handleSubmit} className="signup-form">
                 <div className="form-group">
                     <label htmlFor="name">Name</label>

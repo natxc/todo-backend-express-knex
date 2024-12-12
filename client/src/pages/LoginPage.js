@@ -29,6 +29,7 @@ const LoginPage = () => {
 
     return (
         <div className="login-page">
+            <div style={{ marginBottom: '10rem' }}></div>
             <h1 className="login-header">Login</h1>
             <form onSubmit={handleSubmit} className="login-form">
                 <div className="form-group">

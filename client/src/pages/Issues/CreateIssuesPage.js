@@ -22,8 +22,10 @@ const CreateIssuePage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
             <h1>Create a New Issue</h1>
             <IssueForm onSubmit={handleCreateIssue} submitText="Create Issue" />
+            </main>
         </div>
     );
 };

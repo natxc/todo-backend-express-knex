@@ -70,6 +70,7 @@ const EditIssuePage = () => {
             <header>
                 <Navbar />
             </header>
+            <main className="main-content">
             <h1>Edit Issue</h1>
             <IssueForm
                 onSubmit={handleUpdateIssue}
@@ -83,6 +84,7 @@ const EditIssuePage = () => {
             >
                 Delete Issue
             </Button>
+            </main>
         </div>
     );
 };

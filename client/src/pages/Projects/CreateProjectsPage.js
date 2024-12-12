@@ -22,8 +22,10 @@ const CreateProjectPage = () => {
             <header>
                 <Navbar />
             </header>
+                <main className="main-content">
             <h1>Create a New Project</h1>
             <ProjectForm onSubmit={handleCreateProject} submitText="Create Project" />
+            </main>
         </div>
     );
 };
