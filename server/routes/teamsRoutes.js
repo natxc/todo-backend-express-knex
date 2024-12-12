@@ -1,5 +1,6 @@
 const express = require('express');
 const teamsController = require('../controllers/teamsController.js');
+const { authenticateToken } = require('../middlewares/authMiddleware.js');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ const router = express.Router();
  * @swagger
  * /teams:
  *   get:
- *     summary: Retrieve all teams
+ *     summary: Retrieve all teams for the authenticated user
  *     tags: [Teams]
  *     responses:
  *       200:
@@ -26,7 +27,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Team'
  */
-router.get('/', teamsController.getAllTeams);
+router.get('/', authenticateToken, teamsController.getAllTeams);
 
 /**
  * @swagger
@@ -36,7 +37,7 @@ router.get('/', teamsController.getAllTeams);
  *     tags: [Teams]
  *     parameters:
  *       - in: path
- *         name: team_id
+ *         name: id
  *         required: true
  *         description: Numeric ID of the team to retrieve
  *         schema:
@@ -51,7 +52,7 @@ router.get('/', teamsController.getAllTeams);
  *       404:
  *         description: Team not found
  */
-router.get('/:id', teamsController.getTeam);
+router.get('/:id', authenticateToken, teamsController.getTeam);
 
 /**
  * @swagger
@@ -71,7 +72,7 @@ router.get('/:id', teamsController.getTeam);
  *       400:
  *         description: Invalid input
  */
-router.post('/', teamsController.postTeam);
+router.post('/', authenticateToken, teamsController.postTeam);
 
 /**
  * @swagger
@@ -81,7 +82,7 @@ router.post('/', teamsController.postTeam);
  *     tags: [Teams]
  *     parameters:
  *       - in: path
- *         name: team_id
+ *         name: id
  *         required: true
  *         description: Numeric ID of the team to update
  *         schema:
@@ -100,7 +101,7 @@ router.post('/', teamsController.postTeam);
  *       404:
  *         description: Team not found
  */
-router.patch('/:id', teamsController.patchTeam);
+router.patch('/:id', authenticateToken, teamsController.patchTeam);
 
 /**
  * @swagger
@@ -114,7 +115,7 @@ router.patch('/:id', teamsController.patchTeam);
  *       500:
  *         description: Server error
  */
-router.delete('/', teamsController.deleteAllTeams);
+router.delete('/', authenticateToken, teamsController.deleteAllTeams);
 
 /**
  * @swagger
@@ -124,7 +125,7 @@ router.delete('/', teamsController.deleteAllTeams);
  *     tags: [Teams]
  *     parameters:
  *       - in: path
- *         name: team_id
+ *         name: id
  *         required: true
  *         description: Numeric ID of the team to delete
  *         schema:
@@ -135,6 +136,6 @@ router.delete('/', teamsController.deleteAllTeams);
  *       404:
  *         description: Team not found
  */
-router.delete('/:id', teamsController.deleteTeam);
+router.delete('/:id', authenticateToken, teamsController.deleteTeam);
 
 module.exports = router;

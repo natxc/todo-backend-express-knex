@@ -48,6 +48,13 @@ async function clear() {
     return knex('issues').del().returning('*');
 }
 
+async function getIssuesByUserId(userId) {
+    return knex('issues')
+        .where({ user_id: userId })
+        .select('*');
+}
+
+
 module.exports = {
     all,
     get,
@@ -55,4 +62,5 @@ module.exports = {
     update,
     delete: del,
     clear,
+    getIssuesByUserId
 };
