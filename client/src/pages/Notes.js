@@ -37,13 +37,16 @@ const Notes = () => {
 
             <h2>Random Specifics</h2>
             <ul>
-                <li>Patch and Put</li>
+                <li>The nuances between Patch and Put</li>
             </ul>
 
             <h2>Video Embedding</h2>
-            <p>This was my first time embedding a video directly with the .mp4 and not using an externaly published source</p>
-            <p>Please enjoy a 3-hour chunk of heads down work on the front-end and deployment of this web app</p>
-            <p>Sponsored by Dr.Pepper</p>
+            <ul>
+            <li>This was my first time embedding a video directly with the .mp4 and not using an externaly published source</li>
+            <li>First time working with git lfs too. Probably not best practice. Maybe someone should invent a CDN or something..</li>
+            <li>Please enjoy a 3-hour chunk of heads down work on the front-end and deployment of this web app</li>
+            <li>Sponsored by Dr.Pepper</li>
+            </ul>
             <VideoPlayer />
         </section>
     );
