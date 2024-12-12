@@ -8,7 +8,7 @@
     "test": "cd server && jest",
     "test:watch": "cd server && jest --watch",
     "start": "node server/server.js",
-    "heroku-postbuild": "rm -f yarn.lock && cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "axios": "^1.7.9",
