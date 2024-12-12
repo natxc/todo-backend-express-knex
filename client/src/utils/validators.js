@@ -4,5 +4,5 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-    return password.length >= 6; // Example: Minimum 6 characters
+    return password.length >= 6;
 };
