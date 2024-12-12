@@ -50,8 +50,9 @@ const Notes = () => {
             <li>First time working with git lfs too. Probably not best practice. Maybe someone should invent a CDN or something..</li>
             <li>Please enjoy a 3-hour chunk of heads down work on the front-end and deployment of this web app</li>
             <li>Sponsored by Dr.Pepper</li>
+                <li><VideoPlayer /></li>
             </ul>
-            <VideoPlayer />
+            
         </section>
     );
 };

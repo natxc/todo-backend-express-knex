@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import ProjectsContext from '../../context/ProjectsContext';
-import '../../styles/Project.css';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 const ProjectDetailsPage = () => {
     const { id } = useParams();
@@ -42,9 +42,9 @@ const ProjectDetailsPage = () => {
                 <Navbar />
             </header>
                 <h1>{project.name}</h1>
-                <button onClick={() => navigate(`/projects/${id}/edit`)} className="edit-btn">
+            <Button onClick={() => navigate(`/projects/${id}/edit`)} >
                     Edit Project
-                </button>
+            </Button>
 
             <section className="project-projects-section">
                 <h2>Projects</h2>

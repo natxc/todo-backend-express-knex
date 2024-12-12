@@ -1,0 +1,109 @@
+/* General Page Layout */
+.object-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    padding-top: calc(4rem + 1rem);
+}
+
+.object-page-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+    padding-top: calc(4rem + 1rem);
+}
+
+/* Create Team Button */
+.create-object-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.create-object-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: var(--color-sunburst-orange);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-object-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--color-sunburst-yellow);
+}
+
+/* Loading Section */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Teams List */
+.object-list-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.object-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.object-item {
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.object-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.object-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.object-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .object-list {
+        grid-template-columns: 1fr;
+    }
+}

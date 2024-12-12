@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/Team.css';
+import './forms.css';
 
 const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const [formData, setFormData] = useState({
@@ -17,23 +17,25 @@ const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="team-form">
-            <div className="form-group">
-                <label htmlFor="name">Team Name:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter team name"
-                    required
-                />
-            </div>
-            <button type="submit" className="submit-btn">
-                {submitText}
-            </button>
-        </form>
+        <div className="form-container">
+            <form onSubmit={handleSubmit} className="team-form">
+                <div className="form-group">
+                    <label htmlFor="name">Team Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Enter team name"
+                        required
+                    />
+                </div>
+                <button type="submit" className="submit-btn">
+                    {submitText}
+                </button>
+            </form>
+        </div>
     );
 };
 
