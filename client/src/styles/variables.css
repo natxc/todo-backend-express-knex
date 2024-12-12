@@ -24,4 +24,23 @@
 
     /* Box Shadow */
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Canva */
+    --color-sunburst-orange: #ff9900;
+    --color-sunburst-yellow: #ffcc33;
+    --color-sunburst-red: #ff6666;
+    --color-sunburst-blue: #66ccff;
+    --color-sunburst-white: #ffffff;
+    --color-sunburst-background: #f4f4f4;
+
+    --color-navbar-bg: #333333;
+    --color-navbar-hover: #575757;
+    --color-navbar-active: #007bff;
+    --color-navbar-text: #ffffff;
+
+    --color-welcome-overlay: rgba(0, 0, 0, 0.6);
+    --color-welcome-text: #ffffff;
+
+    --color-bright: #ffcc00;
+    --color-dark: #000000;
 }

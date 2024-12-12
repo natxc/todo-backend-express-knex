@@ -1,0 +1,93 @@
+@import '../styles/variables.css';
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-navbar-bg);
+    color: var(--color-sunburst-white);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    box-shadow: 0px 4px 6px var(--color-shadow);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+/* Logo */
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-sunburst-white);
+}
+
+/* Button Styles */
+.navbar-button {
+    padding: 0.5rem 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-sunburst-white);
+    background-color: var(--color-sunburst-blue);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and Active States */
+.navbar-button:hover {
+    background-color: var(--color-hover);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+.navbar-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--color-sunburst-white);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--color-navbar-bg);
+        width: calc(100% - 2rem);  /* very cool */
+        padding: 1rem;
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+    }
+
+    .navbar-links.open {
+        display: flex;
+    }
+
+    .navbar-button {
+        margin: 0.5rem 0;
+        width: 100%;
+    }
+}
