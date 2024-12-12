@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TeamForm from '../../components/Form/TeamForm';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 const EditTeamPage = () => {
     const { id } = useParams();
@@ -75,9 +76,13 @@ const EditTeamPage = () => {
                 initialData={teamData}
                 submitText="Update Team"
             />
-            <button onClick={handleDeleteTeam} className="delete-btn">
-                Delete Team
-            </button>
+            <Button
+                onClick={handleDeleteTeam}
+                className="delete-btn"
+                variant="danger"
+            >
+                Delete Issue
+            </Button>
         </div>
     );
 };

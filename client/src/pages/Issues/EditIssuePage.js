@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import IssueForm from '../../components/Form/IssueForm';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 const EditIssuePage = () => {
     const { id } = useParams();
@@ -75,9 +76,13 @@ const EditIssuePage = () => {
                 initialData={issueData}
                 submitText="Update Issue"
             />
-            <button onClick={handleDeleteIssue} className="delete-btn">
+            <Button
+                onClick={handleDeleteIssue}
+                className="delete-btn"
+                variant="danger"
+            >
                 Delete Issue
-            </button>
+            </Button>
         </div>
     );
 };

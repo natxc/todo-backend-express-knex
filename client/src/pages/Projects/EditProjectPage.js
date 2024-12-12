@@ -76,8 +76,12 @@ const EditProjectPage = () => {
                 initialData={projectData}
                 submitText="Update Project"
             />
-            <Button onClick={handleDeleteProject} variant="danger">
-                Delete Project
+            <Button
+                onClick={handleDeleteProject}
+                className="delete-btn"
+                variant="danger"
+            >
+                Delete Issue
             </Button>
         </div>
     );
