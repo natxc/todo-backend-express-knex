@@ -14,7 +14,7 @@ const Notes = () => {
             <h2>Knex</h2>
             <ul>
                 <li>I've seen and used similar query builders, but I've never heard of knex</li>
-                <li>Syntax in creating the tables</li>
+                <li>Make command and syntax in creating the tables</li>
                 <li>Running migrations and seeds</li>
             </ul>
 
