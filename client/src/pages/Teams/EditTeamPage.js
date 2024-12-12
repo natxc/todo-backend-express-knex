@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TeamForm from '../../components/Form/TeamForm';
+import Navbar from '../../components/Navbar';
 
 const EditTeamPage = () => {
     const { id } = useParams();
@@ -65,6 +66,9 @@ const EditTeamPage = () => {
 
     return (
         <div className="edit-team-page">
+            <header>
+                <Navbar />
+            </header>
             <h1>Edit Team</h1>
             <TeamForm
                 onSubmit={handleUpdateTeam}

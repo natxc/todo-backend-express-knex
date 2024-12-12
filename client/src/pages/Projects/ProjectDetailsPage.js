@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import ProjectsContext from '../../context/ProjectsContext';
 import '../../styles/Project.css';
+import Navbar from '../../components/Navbar';
 
 const ProjectDetailsPage = () => {
     const { id } = useParams();
@@ -37,12 +38,13 @@ const ProjectDetailsPage = () => {
 
     return (
         <div className="project-details-page">
-            <header className="project-header">
+            <header>
+                <Navbar />
+            </header>
                 <h1>{project.name}</h1>
                 <button onClick={() => navigate(`/projects/${id}/edit`)} className="edit-btn">
                     Edit Project
                 </button>
-            </header>
 
             <section className="project-projects-section">
                 <h2>Projects</h2>

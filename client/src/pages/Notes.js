@@ -1,9 +1,13 @@
 import React from 'react';
 import VideoPlayer from '../components/VideoPlayer';
+import Navbar from '../components/Navbar';
 
 const Notes = () => {
     return (
-        <section className="notes-section">
+        <section className="notes-section">            
+        <header>
+            <Navbar />
+        </header>
             <h1>My Notes</h1>
             <p>It's been a whirlwind of a week and here's what I learned.</p>
 

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ProjectsContext from '../../context/ProjectsContext';
+import Navbar from '../../components/Navbar';
 
 const ProjectsPage = () => {
     const { projects, fetchProjects } = useContext(ProjectsContext);
@@ -22,9 +23,12 @@ const ProjectsPage = () => {
     return (
         <div className="projects-page">
             <header>
+                <Navbar />
+            </header>
+
                 <h1>All Projects</h1>
                 <button className='submit-btn' onClick={() => navigate('/projects/new')}>Create Project</button>
-            </header>
+
 
             <section className="projects-list-section">
                 {projects.length > 0 ? (

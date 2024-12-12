@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
+import Navbar from '../../components/Navbar';
 
 const TeamsPage = () => {
     const { teams, fetchTeams } = useContext(TeamsContext);
@@ -23,11 +24,13 @@ const TeamsPage = () => {
     return (
         <div className="teams-page">
             <header>
+                <Navbar />
+            </header>
+
                 <h1>All Teams</h1>
                 <button className="submit-btn" onClick={() => navigate('/teams/new')}>
                     Create Team
                 </button>
-            </header>
 
             <section className="teams-list-section">
                 <ul className="teams-list">

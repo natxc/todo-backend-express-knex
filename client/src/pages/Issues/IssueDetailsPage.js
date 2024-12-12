@@ -3,6 +3,7 @@ import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import IssuesContext from '../../context/IssuesContext';
 import ProjectsContext from '../../context/ProjectsContext';
 import '../../styles/Issue.css';
+import Navbar from '../../components/Navbar';
 
 const IssueDetailsPage = () => {
     const { id } = useParams();
@@ -40,13 +41,14 @@ const IssueDetailsPage = () => {
 
     return (
         <div className="issue-details-page">
-            <header className="issue-header">
+                        <header>
+                <Navbar />
+            </header>
                 <h1>{issue.title}</h1>
                 <button onClick={() => navigate(`/issues/${id}/edit`)} className="edit-btn"></button>
                 <p>Status: <strong>{issue.status}</strong></p>
                 <p>Priority: <strong>{issue.priority}</strong></p>
                 <p>Assigned to: <strong>{issue.assignee || 'Unassigned'}</strong></p>
-            </header>
 
             <section className="issue-description">
                 <h2>Description</h2>

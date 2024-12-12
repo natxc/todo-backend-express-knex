@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 import ProjectsContext from '../../context/ProjectsContext';
 import '../../styles/Team.css';
+import Navbar from '../../components/Navbar';
 
 const TeamDetailsPage = () => {
     const { id } = useParams();
@@ -39,12 +40,15 @@ const TeamDetailsPage = () => {
 
     return (
         <div className="team-details-page">
-            <header className="team-header">
+            <header>
+                <Navbar />
+            </header>
+            
                 <h1>{team.name}</h1>
                 <button onClick={() => navigate(`/teams/${id}/edit`)} className="edit-btn">
                     Edit Team
                 </button>
-            </header>
+            
 
             <section className="team-projects-section">
                 <h2>Projects</h2>
