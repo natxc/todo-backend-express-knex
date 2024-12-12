@@ -1,46 +1,55 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Button from '../components/Button';
+import '../styles/index.css'
 
-const LoginPage = () => {
-    const [credentials, setCredentials] = useState({ email: '', password: '' });
+const SignupPage = () => {
+    const [credentials, setCredentials] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState(null);
-    const { login } = useAuth();
+    const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCredentials({ ...credentials, [name]: value });
+        setCredentials((prev) => ({ ...prev, [name]: value || '' }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await login(credentials);
-            console.log('Login succeeded, navigating to homepage');
-            navigate('/');
+            await register(credentials);
+            navigate('/login');
         } catch (err) {
-            console.error('Login failed:', err);
-            setError('Invalid email or password');
+            setError(err.message || 'Registration failed. Please try again.');
         }
     };
 
 
     return (
-        <div className="login-page">
-            <h1 className="login-header">Login</h1>
-            <form onSubmit={handleSubmit} className="login-form">
+        <div className="signup-page">
+            <h1 className="signup-header">Sign Up</h1>
+            <form onSubmit={handleSubmit} className="signup-form">
+                <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={credentials.name || ''}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        value={credentials.email}
+                        value={credentials.email || ''}
                         onChange={handleChange}
                         required
-                        className="input-field"
                     />
                 </div>
                 <div className="form-group">
@@ -49,25 +58,18 @@ const LoginPage = () => {
                         type="password"
                         id="password"
                         name="password"
-                        value={credentials.password}
+                        value={credentials.password || ''}
                         onChange={handleChange}
                         required
-                        className="input-field"
                     />
                 </div>
-                {error && <p className="error-message">{error}</p>}
+                {error && <p className="error">{error}</p>}
                 <Button type="submit" className="primary-btn">
-                    Login
+                    Sign Up
                 </Button>
             </form>
-            <div className="signup-redirect">
-                <p>Don't have an account?</p>
-                <Link to="/signup" className="signup-link">
-                    Sign Up Here
-                </Link>
-            </div>
         </div>
     );
 };
 
-export default LoginPage;
+export default SignupPage;

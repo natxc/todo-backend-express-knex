@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const { user, logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -59,6 +65,9 @@ const Navbar = () => {
                         onClick={() => handleNavigation('/docs')}
                     >
                         API Docs
+                    </button>
+                    <button onClick={handleLogout} className="logout-btn">
+                        Log Out
                     </button>
                 </div>
             </div>

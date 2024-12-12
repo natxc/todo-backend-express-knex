@@ -11,11 +11,16 @@ async function get(id) {
 }
 
 async function create({ name, email, password }) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const results = await knex('users')
-        .insert({ name, email, password: hashedPassword })
-        .returning('*');
-    return results[0];
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const results = await knex('users')
+            .insert({ name, email, password: hashedPassword })
+            .returning('*');
+        return results[0];
+    } catch (err) {
+        console.error('Database error during user creation:', err);
+        throw err;
+    }
 }
 
 async function update(id, properties) {
@@ -37,8 +42,16 @@ async function clear() {
 }
 
 async function findByEmail(email) {
-    return knex('users').where({ email }).first();
+    try {
+        const user = await knex('users').where({ email }).first();
+        console.log('User fetched from DB:', user);
+        return user;
+    } catch (err) {
+        console.error('Database error:', err);
+        throw err;
+    }
 }
+
 
 module.exports = {
     all,

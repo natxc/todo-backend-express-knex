@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { TextEncoder, TextDecoder } = require('util');
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
@@ -25,6 +27,10 @@ const swaggerUi = require('swagger-ui-express');
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+if (!process.env.JWT_SECRET) {
+  console.error('Missing JWT_SECRET environment variable');
+  process.exit(1);
+}
 
 // API Routes
 app.use('/issues', issuesRoute);
