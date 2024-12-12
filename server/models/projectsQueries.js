@@ -33,11 +33,18 @@ async function clear() {
     return knex('projects').del().returning('*');
 }
 
+async function getProjectsByUserId(userId) {
+    return knex('projects')
+        .where({ user_id: userId })
+        .select('*');
+}
+
 module.exports = {
     all,
     get,
     create,
     update,
     delete: del,
-    clear
+    clear,
+    getProjectsByUserId
 }

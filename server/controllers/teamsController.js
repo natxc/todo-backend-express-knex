@@ -15,15 +15,31 @@ function createTeam(req, data) {
     };
 }
 
-
 async function getAllTeams(req, res) {
-    const allEntries = await teams.all();
-    return res.send(allEntries);
+    try {
+        const userId = req.user.user_id; // Extract user_id from authenticated user
+        const userTeams = await teams.getTeamsByUserId(userId); // Fetch teams for the user
+        return res.send(userTeams.map(_.curry(createTeam)(req)));
+    } catch (err) {
+        console.error("Error fetching all teams:", err);
+        res.status(500).send("Could not fetch all teams.");
     }
+}
 
 async function getTeam(req, res) {
-    const team = await teams.get(req.params.id);
-    return res.send(team);
+    try {
+        const userId = req.user.user_id; // Extract user_id
+        const team = await teams.get(req.params.id);
+
+        if (!team || team.user_id !== userId) {
+            return res.status(404).send("Team not found or you do not have access.");
+        }
+
+        return res.send(createTeam(req, team));
+    } catch (err) {
+        console.error("Error fetching team:", err);
+        res.status(500).send("Could not fetch team.");
+    }
 }
 
 async function postTeam(req, res) {
@@ -34,14 +50,14 @@ async function postTeam(req, res) {
     }
 
     try {
-        const created = await teams.create({ name });
-        return res.send(createTeam(req, created));
+        const userId = req.user.user_id; // Extract user_id
+        const created = await teams.create({ name, user_id: userId }); // Add user_id to the new team
+        return res.status(201).send(createTeam(req, created));
     } catch (err) {
         console.error("Error creating team:", err);
-        res.status(500).send("Error creating team.");
+        res.status(500).send("Could not create team.");
     }
 }
-
 
 async function patchTeam(req, res) {
     const updatedFields = req.body;
@@ -51,23 +67,47 @@ async function patchTeam(req, res) {
     }
 
     try {
+        const userId = req.user.user_id; // Extract user_id
+        const team = await teams.get(req.params.id);
+
+        if (!team || team.user_id !== userId) {
+            return res.status(404).send("Team not found or you do not have access.");
+        }
+
         const patched = await teams.update(req.params.id, updatedFields);
         return res.send(createTeam(req, patched));
     } catch (err) {
         console.error("Error updating team:", err);
-        res.status(500).send("Error updating team.");
+        res.status(500).send("Could not update team.");
     }
 }
 
-
 async function deleteAllTeams(req, res) {
-    const deletedTeams = await teams.clear();
-    return res.send(deletedTeams.map(_.curry(createTeam)(req)));
+    try {
+        const userId = req.user.user_id; // Extract user_id
+        const deletedTeams = await teams.deleteAllByUserId(userId); // Delete all teams for the user
+        return res.send(deletedTeams.map(_.curry(createTeam)(req)));
+    } catch (err) {
+        console.error("Error deleting all teams:", err);
+        res.status(500).send("Could not delete all teams.");
+    }
 }
 
 async function deleteTeam(req, res) {
-    const deleted = await teams.delete(req.params.id);
-    return res.send(createTeam(req, deleted));
+    try {
+        const userId = req.user.user_id; // Extract user_id
+        const team = await teams.get(req.params.id);
+
+        if (!team || team.user_id !== userId) {
+            return res.status(404).send("Team not found or you do not have access.");
+        }
+
+        const deleted = await teams.delete(req.params.id);
+        return res.send(createTeam(req, deleted));
+    } catch (err) {
+        console.error("Error deleting team:", err);
+        res.status(500).send("Could not delete team.");
+    }
 }
 
 function addErrorReporting(func, message) {
@@ -84,11 +124,11 @@ function addErrorReporting(func, message) {
 const toExport = {
     getAllTeams: { method: getAllTeams, errorMessage: "Could not fetch all teams" },
     getTeam: { method: getTeam, errorMessage: "Could not fetch team" },
-    postTeam: { method: postTeam, errorMessage: "Could not post team" },
-    patchTeam: { method: patchTeam, errorMessage: "Could not patch team" },
+    postTeam: { method: postTeam, errorMessage: "Could not create team" },
+    patchTeam: { method: patchTeam, errorMessage: "Could not update team" },
     deleteAllTeams: { method: deleteAllTeams, errorMessage: "Could not delete all teams" },
     deleteTeam: { method: deleteTeam, errorMessage: "Could not delete team" }
-}
+};
 
 for (let route in toExport) {
     toExport[route] = addErrorReporting(toExport[route].method, toExport[route].errorMessage);
