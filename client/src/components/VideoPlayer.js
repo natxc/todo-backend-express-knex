@@ -1,5 +1,5 @@
 import React from 'react';
-import videoFile from '../assets/Locking_In.MP4';
+import videoFile from '../assets/Locking_In.mp4';
 
 const VideoPlayer = () => {
     return (
