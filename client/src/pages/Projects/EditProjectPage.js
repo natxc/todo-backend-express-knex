@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProjectForm from '../../components/Form/ProjectForm';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
 
 const EditProjectPage = () => {
     const { id } = useParams();
@@ -75,9 +76,9 @@ const EditProjectPage = () => {
                 initialData={projectData}
                 submitText="Update Project"
             />
-            <button onClick={handleDeleteProject} className="delete-btn">
+            <Button onClick={handleDeleteProject} variant="danger">
                 Delete Project
-            </button>
+            </Button>
         </div>
     );
 };

@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ProjectsContext from '../../context/ProjectsContext';
 import Navbar from '../../components/Navbar';
+import Button from '../../components/Button';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import '../../styles/PageAndDetail.css';
 
 const ProjectsPage = () => {
     const { projects, fetchProjects } = useContext(ProjectsContext);
@@ -16,37 +19,46 @@ const ProjectsPage = () => {
         loadProjects();
     }, [fetchProjects]);
 
-    if (loading) {
-        return <div className="loading">Loading projects...</div>;
-    }
-
     return (
-        <div className="projects-page">
+        <div className="object-page">
             <header>
                 <Navbar />
             </header>
 
-                <h1>All Projects</h1>
-                <button className='submit-btn' onClick={() => navigate('/projects/new')}>Create Project</button>
+            <main className="object-page-content">
+                <h1 className="page-title">All Projects</h1>
+                <div className="create-object-container">
+                    <Button
+                        onClick={() => navigate('/projects/new')}
+                        className="create-object-btn"
+                    >
+                        Create Project
+                    </Button>
+                </div>
 
-
-            <section className="projects-list-section">
-                {projects.length > 0 ? (
-                    <ul className="projects-list">
-                        <ul>
-                            {projects.map((project) => (
-                                <li key={project.project_id} className="project-item">
-                                    <Link to={`/projects/${project.project_id}`} className="project-link">
-                                        <h2>{project.name}</h2>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </ul>
+                {loading ? (
+                    <div className="loading-container">
+                        <LoadingSpinner />
+                        <p>Loading projects...</p>
+                    </div>
                 ) : (
-                    <p>No projects found. </p>
+                    <section className="object-list-section">
+                        {projects.length > 0 ? (
+                            <ul className="object-list">
+                                {projects.map((project) => (
+                                    <li key={project.project_id} className="object-item">
+                                        <Link to={`/projects/${project.project_id}`} className="object-link">
+                                            <h2 className="object-name">{project.name}</h2>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No projects found.</p>
+                        )}
+                    </section>
                 )}
-            </section>
+            </main>
         </div>
     );
 };

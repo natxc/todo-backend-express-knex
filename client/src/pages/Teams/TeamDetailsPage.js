@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import TeamsContext from '../../context/TeamsContext';
 import ProjectsContext from '../../context/ProjectsContext';
-import '../../styles/Team.css';
+import '../../styles/PageAndDetail.css';
 import Navbar from '../../components/Navbar';
 
 const TeamDetailsPage = () => {
@@ -43,7 +43,7 @@ const TeamDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
-            
+
                 <h1>{team.name}</h1>
                 <button onClick={() => navigate(`/teams/${id}/edit`)} className="edit-btn">
                     Edit Team
