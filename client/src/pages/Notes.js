@@ -53,6 +53,7 @@ const Notes = () => {
                 <li>Need to add in comments</li>
                 <li>Have a PR out there to start working on user authentication for fetching their teams, projects, issues</li>
                 <li>I'm pretty sure I have something blowing up the network console</li>
+                <li>I need to add API to the routes - something wonky is happening with the deployment</li>
             </ul>
                 <div style={{ marginBottom: '2rem' }}></div>
             <h2>Random Specifics & General best practices</h2>
