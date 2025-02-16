@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
@@ -34,6 +34,7 @@ const App = () => {
             <Router>
               <Routes>
                 <Route path="/" element={<PrivateRoute element={<HomePage />} />} />
+                <Route path="/login" element={<Navigate to="/" replace />} />
 
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/projects/new" element={<CreateProjectPage />} />
@@ -49,9 +50,9 @@ const App = () => {
                 <Route path="/teams/new" element={<CreateTeamPage />} />
                 <Route path="/teams/:id" element={<TeamDetailsPage />} />
                 <Route path="/teams/:id/edit" element={<EditTeamPage />} />
-                
+
                 <Route path="/docs" element={<ApiDocsRedirect />} />
-                <Route path="/notes" element={<Notes />} /> 
+                <Route path="/notes" element={<Notes />} />
               </Routes>
             </Router>
           </TeamsProvider>
