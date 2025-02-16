@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './forms.css';
+import Button from '../../components/Button';
 
 const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const [formData, setFormData] = useState({
@@ -16,6 +17,35 @@ const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
         onSubmit(formData);
     };
 
+    const handleDeleteTeam = async () => {
+        if (!initialData.id) {
+            alert('Team ID is missing!');
+            return;
+        }
+
+        const confirmed = window.confirm('Are you sure you want to delete this team?');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`/teams/${initialData.id}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`Failed to delete team: ${errorData.message}`);
+            }
+
+            console.log('Team deleted successfully');
+            alert('Team deleted successfully!');
+            window.location.href = '/teams';
+        } catch (error) {
+            console.error('Error deleting team:', error);
+            alert(`Failed to delete team: ${error.message}`);
+        }
+    };
+
+
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit} className="team-form">
@@ -31,9 +61,16 @@ const TeamForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
                         required
                     />
                 </div>
-                <button type="submit" className="submit-btn">
-                    {submitText}
-                </button>
+                    <Button type="submit" className="submit-btn" variant="primary">
+                        {submitText}
+                    </Button>
+                    <Button
+                        onClick={handleDeleteTeam}
+                        className="delete-btn"
+                        variant="danger"
+                    >
+                        Delete Team
+                    </Button>
             </form>
         </div>
     );

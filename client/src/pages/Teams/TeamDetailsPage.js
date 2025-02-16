@@ -43,9 +43,10 @@ const TeamDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-
-                <h1>{team.name}</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>{team.name}</h1>
                 <button onClick={() => navigate(`/teams/${id}/edit`)} className="edit-btn">
                     Edit Team
                 </button>

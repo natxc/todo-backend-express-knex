@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Button from '../components/Button';
 
-const LoginPage = () => {
+const LoginPage = ({ toggleAuthMode }) => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [error, setError] = useState(null);
     const { login } = useAuth();
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,18 +16,15 @@ const LoginPage = () => {
         e.preventDefault();
         try {
             await login(credentials);
-            console.log('Login succeeded, navigating to homepage');
-            navigate('/');
+            console.log('Login succeeded');
         } catch (err) {
             console.error('Login failed:', err);
             setError('Invalid email or password');
         }
     };
 
-
     return (
-        <div className="login-page">
-            <div style={{ marginBottom: '10rem' }}></div>
+        <div>
             <h1 className="login-header">Login</h1>
             <form onSubmit={handleSubmit} className="login-form">
                 <div className="form-group">
@@ -61,12 +56,70 @@ const LoginPage = () => {
                     Login
                 </Button>
             </form>
-            <div className="signup-redirect">
+
+            <div className="auth-toggle">
                 <p>Don't have an account?</p>
-                <Link to="/signup" className="signup-link">
+                <button className="toggle-btn" onClick={toggleAuthMode}>
                     Sign Up Here
-                </Link>
+                </button>
             </div>
+
+            <style jsx>{`
+                .login-header {
+                    margin-bottom: 2rem;
+                    font-size: 2rem;
+                    color: #333;
+                    text-align: center;
+                }
+
+                .login-form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+
+                .form-group {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .input-field {
+                    width: 100%;
+                    padding: 0.5rem;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .primary-btn {
+                    margin-top: 1rem;
+                    padding: 0.75rem;
+                    border: none;
+                    border-radius: 10px;
+                    background-color: #007BFF;
+                    color: white;
+                    cursor: pointer;
+                }
+
+                .auth-toggle {
+                    margin-top: 2rem;
+                    font-size: 0.9rem;
+                    color: #333;
+                    text-align: center;
+                }
+
+                .toggle-btn {
+                    background: none;
+                    border: none;
+                    color: #007BFF;
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+
+                .toggle-btn:hover {
+                    color: #0056b3;
+                }
+            `}</style>
         </div>
     );
 };

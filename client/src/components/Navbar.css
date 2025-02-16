@@ -6,14 +6,19 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--color-navbar-bg);
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Semi-transparent white */
+    backdrop-filter: blur(10px);
+    /* Frosted glass effect */
     color: var(--color-sunburst-white);
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    box-shadow: 0px 4px 6px var(--color-shadow);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    /* Slightly stronger shadow */
+    transition: background-color 0.3s ease;
 }
 
 .navbar-container {
@@ -21,14 +26,25 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
+    height: 80px;
 }
 
 /* Logo */
 .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--color-sunburst-white);
+    font-size: 3.5rem;
+    font-weight: bolder;
+    color: var(--color-navbar-text);
+    font-family: 'SF Hello', sans-serif;
+    /* text-shadow: 3px 3px 3px rgba(0, 0, 0, 1); */
+}
+
+.navbar-logo-img {
+    height: 135px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Button Styles */
@@ -39,15 +55,14 @@
     font-size: 1rem;
     font-weight: bold;
     color: var(--color-sunburst-white);
-    background-color: var(--color-sunburst-blue);
-    border: none;
+    background-color: var(--color-navbar-bg);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Hover and Active States */
 .navbar-button:hover {
-    background-color: var(--color-hover);
+    background-color: var(--color-navbar-hover);
     transform: scale(1.05);
 }
 
@@ -93,10 +108,7 @@
 }
 
 .logout-btn {
-    background: none;
-    border: none;
-    background-color: #0056b3;
-    text-decoration: underline;
+    background-color: var(--color-navbar-logout);
     cursor: pointer;
     font-size: 1rem;
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProjectForm from '../../components/Form/ProjectForm';
 import Navbar from '../../components/Navbar';
-import Button from '../../components/Button';
 
 const EditProjectPage = () => {
     const { id } = useParams();
@@ -39,28 +38,6 @@ const EditProjectPage = () => {
         }
     };
 
-    const handleDeleteProject = async () => {
-        const confirmed = window.confirm('Are you sure you want to delete this project?');
-        if (!confirmed) return;
-
-        try {
-            const response = await fetch(`/projects/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to delete project: ${response.statusText}`);
-            }
-
-            console.log('Project deleted successfully');
-            alert('Project deleted successfully!');
-            navigate('/projects');
-        } catch (error) {
-            console.error('Error deleting project:', error);
-            alert('Failed to delete project. Please try again.');
-        }
-    };
-
     if (!projectData) {
         return <div>Loading...</div>;
     }
@@ -70,20 +47,15 @@ const EditProjectPage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-            <h1>Edit Project</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Edit Project</h1>
             <ProjectForm
                 onSubmit={handleUpdateProject}
-                initialData={projectData}
+                initialData={{...projectData, id}}
                 submitText="Update Project"
             />
-            <Button
-                onClick={handleDeleteProject}
-                className="delete-btn"
-                variant="danger"
-            >
-                Delete Issue
-            </Button>
             </main>
         </div>
     );

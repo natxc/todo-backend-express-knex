@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import IssueForm from '../../components/Form/IssueForm';
 import Navbar from '../../components/Navbar';
-import Button from '../../components/Button';
 
 const EditIssuePage = () => {
     const { id } = useParams();
@@ -39,28 +38,6 @@ const EditIssuePage = () => {
         }
     };
 
-    const handleDeleteIssue = async () => {
-        const confirmed = window.confirm('Are you sure you want to delete this issue?');
-        if (!confirmed) return;
-
-        try {
-            const response = await fetch(`/issues/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to delete issue: ${response.statusText}`);
-            }
-
-            console.log('Issue deleted successfully');
-            alert('Issue deleted successfully!');
-            navigate('/issues');
-        } catch (error) {
-            console.error('Error deleting issue:', error);
-            alert('Failed to delete issue. Please try again.');
-        }
-    };
-
     if (!issueData) {
         return <div>Loading...</div>;
     }
@@ -70,20 +47,15 @@ const EditIssuePage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-            <h1>Edit Issue</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Edit Issue</h1>
             <IssueForm
                 onSubmit={handleUpdateIssue}
-                initialData={issueData}
+                initialData={{...issueData, id}}
                 submitText="Update Issue"
             />
-            <Button
-                onClick={handleDeleteIssue}
-                className="delete-btn"
-                variant="danger"
-            >
-                Delete Issue
-            </Button>
             </main>
         </div>
     );

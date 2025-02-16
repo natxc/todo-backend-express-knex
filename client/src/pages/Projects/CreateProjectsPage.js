@@ -18,12 +18,13 @@ const CreateProjectPage = () => {
     };
 
     return (
-        <div className="create-project-page">
+        <div className="create-project-page" style={{
+            backgroundImage: `url('/assets/hero.png')` }} >
             <header>
                 <Navbar />
             </header>
                 <main className="main-content">
-            <h1>Create a New Project</h1>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Create a New Project</h1>
             <ProjectForm onSubmit={handleCreateProject} submitText="Create Project" />
             </main>
         </div>

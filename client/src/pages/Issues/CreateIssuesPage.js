@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import IssueForm from '../../components/Form/IssueForm';
 import IssuesContext from '../../context/IssuesContext';
 import Navbar from '../../components/Navbar';
+import '../../styles/index.css'
 
 const CreateIssuePage = () => {
     const { createIssue } = useContext(IssuesContext);
@@ -18,12 +19,12 @@ const CreateIssuePage = () => {
     };
 
     return (
-        <div className="create-issue-page">
+        <div className="create-issue-page" style={{ backgroundImage: `url('/assets/hero.png')` }} >
             <header>
                 <Navbar />
             </header>
             <main className="main-content">
-            <h1>Create a New Issue</h1>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Create a New Issue</h1>
             <IssueForm onSubmit={handleCreateIssue} submitText="Create Issue" />
             </main>
         </div>

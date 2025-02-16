@@ -44,8 +44,10 @@ const IssueDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-                <h1>{issue.title}</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>{issue.title}</h1>
                 <Button onClick={() => navigate(`/issues/${id}/edit`)} >
                     Edit Issue
                 </Button>

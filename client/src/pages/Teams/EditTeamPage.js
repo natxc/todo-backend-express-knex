@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import TeamForm from '../../components/Form/TeamForm';
 import Navbar from '../../components/Navbar';
-import Button from '../../components/Button';
 
 const EditTeamPage = () => {
     const { id } = useParams();
@@ -39,28 +38,6 @@ const EditTeamPage = () => {
         }
     };
 
-    const handleDeleteTeam = async () => {
-        const confirmed = window.confirm('Are you sure you want to delete this team?');
-        if (!confirmed) return;
-
-        try {
-            const response = await fetch(`/teams/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error(`Failed to delete team: ${response.statusText}`);
-            }
-
-            console.log('Team deleted successfully');
-            alert('Team deleted successfully!');
-            navigate('/teams'); // Redirect to the teams list page
-        } catch (error) {
-            console.error('Error deleting team:', error);
-            alert('Failed to delete team. Please try again.');
-        }
-    };
-
     if (!teamData) {
         return <div>Loading...</div>;
     }
@@ -70,20 +47,15 @@ const EditTeamPage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-            <h1>Edit Team</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Edit Team</h1>
             <TeamForm
                 onSubmit={handleUpdateTeam}
-                initialData={teamData}
+                initialData={{ ...teamData, id }}
                 submitText="Update Team"
             />
-            <Button
-                onClick={handleDeleteTeam}
-                className="delete-btn"
-                variant="danger"
-            >
-                Delete Issue
-            </Button>
             </main>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TeamsContext from '../../context/TeamsContext';
 import './forms.css';
+import Button from '../../components/Button';
 
 const ProjectForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const { teams, fetchTeams } = useContext(TeamsContext);
@@ -27,6 +28,28 @@ const ProjectForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         onSubmit(formData);
+    };
+
+    const handleDeleteProject = async () => {
+        const confirmed = window.confirm('Are you sure you want to delete this project?');
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`/projects/${initialData.id}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to delete project: ${response.statusText}`);
+            }
+
+            console.log('Project deleted successfully');
+            alert('Project deleted successfully!');
+            window.location.href = '/projects';
+        } catch (error) {
+            console.error('Error deleting project:', error);
+            alert('Failed to delete project. Please try again.');
+        }
     };
 
     return (
@@ -66,14 +89,19 @@ const ProjectForm = ({ onSubmit, initialData = {}, submitText = 'Submit' }) => {
                         )}
                     </select>
                 </div>
-
-                <button type="submit" className="submit-btn">
-                    {submitText}
-                </button>
+                    <Button type="submit" className="submit-btn" variant="primary">
+                        {submitText}
+                    </Button>
+                    <Button
+                        onClick={handleDeleteProject}
+                        className="delete-btn"
+                        variant="danger"
+                    >
+                        Delete Project
+                    </Button>
             </form>
         </div>
     );
 };
 
 export default ProjectForm;
-

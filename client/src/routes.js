@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/Projects/ProjectsPage';
 import ProjectDetailsPage from './pages/Projects/ProjectDetailsPage';
@@ -12,7 +11,6 @@ import TeamDetailsPage from './pages/Teams/TeamDetailsPage';
 const AppRoutes = () => (
     <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectDetailsPage />} />

@@ -18,12 +18,14 @@ const CreateTeamPage = () => {
     };
 
     return (
-        <div className="create-team-page">
+        <div className="create-team-page" style={{
+            backgroundImage: `url('/assets/hero.png')`
+        }}>
             <header>
                 <Navbar />
             </header>
             <main className="main-content">
-            <h1>Create a New Team</h1>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>Create a New Team</h1>
             <TeamForm onSubmit={handleCreateTeam} submitText="Create Team" />
             </main>
         </div>

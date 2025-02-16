@@ -41,8 +41,10 @@ const ProjectDetailsPage = () => {
             <header>
                 <Navbar />
             </header>
-            <main className="main-content">
-                <h1>{project.name}</h1>
+            <main className="main-content" style={{
+                backgroundImage: `url('/assets/hero.png')`
+            }}>
+                <h1 style={{ textAlign: 'center', paddingTop: '5em' }}>{project.name}</h1>
             <Button onClick={() => navigate(`/projects/${id}/edit`)} >
                     Edit Project
             </Button>
