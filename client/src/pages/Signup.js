@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Button from '../components/Button';
 
 const SignupPage = ({ toggleAuthMode }) => {
     const [credentials, setCredentials] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState(null);
-    const { register } = useAuth();
+    const { register, login } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -16,7 +18,8 @@ const SignupPage = ({ toggleAuthMode }) => {
         e.preventDefault();
         try {
             await register(credentials);
-            console.log('Signup succeeded');
+            await login({ email: credentials.email, password: credentials.password });
+            navigate('/');
         } catch (err) {
             setError(err.message || 'Registration failed. Please try again.');
         }

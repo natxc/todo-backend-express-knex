@@ -12,6 +12,7 @@ const HomePage = () => {
     useEffect(() => {
         if (!isLoading) {
             setShowAuthModal(!user);
+            setIsSignup(false);
         }
     }, [user, isLoading]);
 
